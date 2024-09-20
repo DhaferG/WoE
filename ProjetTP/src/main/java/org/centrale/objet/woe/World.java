@@ -20,7 +20,7 @@ public class World {
     
     public World() {
     this.robin= new Archer();
-    this.GuillaumeT=this.robin;
+    this.GuillaumeT=new Archer(robin);
     this.peon= new Paysan();
     this.bugs= new Lapin();
     }
@@ -33,6 +33,7 @@ public class World {
         robin.pos = new Point2D(positions[0], positions[1]);
         peon.pos = new Point2D(positions[2], positions[3]);
         bugs.pos = new Point2D(positions[4], positions[5]);
+        GuillaumeT=new Archer(robin);
  
     }
 

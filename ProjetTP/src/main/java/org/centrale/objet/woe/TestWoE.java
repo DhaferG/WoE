@@ -22,6 +22,10 @@ public class TestWoE {
         System.out.println("position initiale de bugs");
         monde.bugs.getPos().afficher();
         
+        // position initiale de GuillaumeT
+        System.out.println("position initiale de GuillaumeT");
+        monde.GuillaumeT.getPos().afficher();
+        
         // position deplacée aléatoirement de robin, peon and bugs
         System.out.println("position deplacée de robin");
         monde.robin.deplace();
@@ -34,6 +38,10 @@ public class TestWoE {
         System.out.println("position deplacée de bugs");
         monde.bugs.deplace();
         monde.bugs.getPos().afficher();
+        
+        // position deplacée aléatoirement de GuillaumeT
+        System.out.println("position deplacée de GuillaumeT");
+        monde.GuillaumeT.getPos().afficher();
         
     
     }
