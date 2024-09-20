@@ -10,18 +10,63 @@ import java.util.Random;
  *
  * @author nourkouki
  */
+
 public class Personnage {
-    
+    /**
+     * le nom du personnage
+     */
     public String nom;
+    
+    /**
+     * Points de Vie du personnage
+     */
     public int ptVie;
+    
+    /**
+     * Degré d'attaque
+     */
     public int degAtt;
+    
+    /**
+     * Points de parade
+     */
     public int ptPar;
+    
+    /**
+     * pourcentage d'attaque
+     */
     public int pageAtt;
+    
+    /**
+     * pourcentage de parade
+     */
     public int pagePar;
+    
+    /**
+     * distance d'attaque maximale
+     */
     public int distAttMax;
+    
+    
+    /**
+     * position du personnage
+     */
     public Point2D pos;
 
     // Constructeurs
+    /**
+     * permet d'attribuer des caractéristiques à un personnage et prend 8 parametres
+     * @param n: nom du personnage
+     * @param pVie: les points de vie du personnage
+     * @param dAtt: degré d'attaque
+     * @param pPar: points de parade
+     * @param paAtt: Pourcentage d'attaque
+     * @param paPar: pourcentage de parade
+     * @param dMax: distance maximale d'attaque
+     * @param p: position du personnage 
+     * 
+    */
+    
     public Personnage(String n, int pVie, int dAtt, int pPar, int paAtt, int paPar, int dMax, Point2D p) {
         this.nom = n;
         this.ptVie = pVie;
@@ -33,6 +78,11 @@ public class Personnage {
         this.pos = p;
     }
 
+    /**
+     * permet de creer un personnage à partir d'un autre personnage existant
+     * @param perso: un personnage exitant
+     */
+    
     public Personnage(Personnage perso) {
         this.nom = perso.nom;
         this.ptVie = perso.ptVie;
@@ -43,6 +93,10 @@ public class Personnage {
         this.distAttMax = perso.distAttMax;
         this.pos = perso.pos;
     }
+    
+    /**
+     * permet de creer un personnage avec des valeurs par defaut
+     */
     
     public Personnage() {
         this.nom = "";
@@ -120,6 +174,10 @@ public class Personnage {
         this.pos = pos;
     }
     
+    /**
+     * methode deplace permet dde deplacer aléatoirement un objet sur une case adjacente
+     * de la ou il se trouve
+     */
 
     // Méthode de déplacement aléatoire
     public void deplace() {
@@ -133,6 +191,9 @@ public class Personnage {
         pos.setY(pos.getY() + deltaY);
     }
 
+    /**
+     * methode affiche permet d'afficher les caractéristique d'un personnage
+     */
     //methode affiche
     public void affiche() {
     System.out.println("Nom : " + nom);
