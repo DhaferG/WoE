@@ -121,18 +121,17 @@ public class Personnage {
     }
     
 
-    // methode deplace
+    // Méthode de déplacement aléatoire
     public void deplace() {
         Random rand = new Random();
-        // Définir une valeur maximale de déplacement pour chaque direction
-        int maxDeplacement = 5; // Vous pouvez ajuster cette valeur
-        int deltaX = rand.nextInt(maxDeplacement * 2 + 1) - maxDeplacement; // Valeur aléatoire entre -maxDeplacement et maxDeplacement
-        int deltaY = rand.nextInt(maxDeplacement * 2 + 1) - maxDeplacement;
+        // Déplacement aléatoire entre -1 et 1 sur les axes x et y
+        int deltaX = rand.nextInt(3) - 1; // Valeur aléatoire entre -1 et 1
+        int deltaY = rand.nextInt(3) - 1;
 
-        // Déplacer le personnage
+        // Mettre à jour la position
         pos.setX(pos.getX() + deltaX);
         pos.setY(pos.getY() + deltaY);
-}
+    }
 
     //methode affiche
     public void affiche() {

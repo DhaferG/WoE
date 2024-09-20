@@ -4,6 +4,8 @@
  */
 package org.centrale.objet.woe;
 
+import java.util.Random;
+
 /**
  *
  * @author nourkouki
@@ -95,13 +97,26 @@ public class Monstre {
     
     // methode deplace
     
-    public void deplace(){
-        
+    public void deplace() {
+        Random rand = new Random();
+        // Déplacement aléatoire entre -1 et 1 sur les axes x et y
+        int deltaX = rand.nextInt(3) - 1; // Valeur aléatoire entre -1 et 1
+        int deltaY = rand.nextInt(3) - 1;
+
+        // Mettre à jour la position
+        pos.setX(pos.getX() + deltaX);
+        pos.setY(pos.getY() + deltaY);
     }
     
     // methode affiche
     
-    public void affiche(){
-        
-    }    
+    public void affiche() {
+    System.out.println("Points de vie : " + ptVie);
+    System.out.println("Dégâts d'attaque : " + degAtt);
+    System.out.println("Points de parade : " + ptPar);
+    System.out.println("Pourcentage d'attaque : " + pageAtt);
+    System.out.println("Pourcentage de parade : " + pagePar);
+    System.out.print("Position : ");
+    pos.afficher();
+    } 
 }

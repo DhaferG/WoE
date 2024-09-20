@@ -55,6 +55,7 @@ public class Point2D {
     public void afficher() {
         System.out.println("[" + x + ", " + y + "]");
     }
+    
     // set position
     public void setPosition(int x, int y) {
         setX(x);
@@ -62,6 +63,7 @@ public class Point2D {
 
     }
     
+ 
     // Méthode pour translater le point (ajouter un incrément aux coordonnées)
     public void translater(int dx, int dy) {
         this.x += dx;
