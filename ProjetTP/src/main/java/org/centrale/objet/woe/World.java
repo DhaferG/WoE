@@ -5,12 +5,14 @@
 package org.centrale.objet.woe;
 
 import java.util.Random;
+
 /**
  *
  * @author nourkouki
  */
 public class World {
     public Archer robin;
+    public Archer GuillaumeT;
     public Paysan peon;
     public Lapin bugs;
     
@@ -18,6 +20,7 @@ public class World {
     
     public World() {
     this.robin= new Archer();
+    this.GuillaumeT=this.robin;
     this.peon= new Paysan();
     this.bugs= new Lapin();
     }
