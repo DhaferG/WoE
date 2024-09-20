@@ -64,6 +64,64 @@ public class Personnage {
         this.nom = n;
     }
 
+    public int getPtVie() {
+        return ptVie;
+    }
+
+    public int getDegAtt() {
+        return degAtt;
+    }
+
+    public int getPtPar() {
+        return ptPar;
+    }
+
+    public int getPageAtt() {
+        return pageAtt;
+    }
+
+    public int getPagePar() {
+        return pagePar;
+    }
+
+    public int getDistAttMax() {
+        return distAttMax;
+    }
+
+    public Point2D getPos() {
+        return pos;
+    }
+
+    public void setPtVie(int ptVie) {
+        this.ptVie = ptVie;
+    }
+
+    public void setDegAtt(int degAtt) {
+        this.degAtt = degAtt;
+    }
+
+    public void setPtPar(int ptPar) {
+        this.ptPar = ptPar;
+    }
+
+    public void setPageAtt(int pageAtt) {
+        this.pageAtt = pageAtt;
+    }
+
+    public void setPagePar(int pagePar) {
+        this.pagePar = pagePar;
+    }
+
+    public void setDistAttMax(int distAttMax) {
+        this.distAttMax = distAttMax;
+    }
+
+    public void setPos(Point2D pos) {
+        this.pos = pos;
+    }
+    
+
+    // methode deplace
     public void deplace() {
         Random rand = new Random();
         // Définir une valeur maximale de déplacement pour chaque direction
@@ -76,7 +134,7 @@ public class Personnage {
         pos.setY(pos.getY() + deltaY);
 }
 
-
+    //methode affiche
     public void affiche() {
     System.out.println("Nom : " + nom);
     System.out.println("Points de vie : " + ptVie);
