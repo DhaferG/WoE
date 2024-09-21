@@ -7,11 +7,14 @@ package org.centrale.objet.woe;
 import java.util.Random;
 
 /**
- *
+ * la classe Personnage permet d'attribuer des caractéristiques à un personnage
  * @author nourkouki
  */
 
 public class Personnage {
+    
+    //Attributs de la classe
+    
     /**
      * le nom du personnage
      */
@@ -55,7 +58,7 @@ public class Personnage {
 
     // Constructeurs
     /**
-     * permet d'attribuer des caractéristiques à un personnage et prend 8 parametres
+     * Un constructeur de la classe Personnage avec 8 parametres
      * @param n: nom du personnage
      * @param pVie: les points de vie du personnage
      * @param dAtt: degré d'attaque
@@ -79,6 +82,7 @@ public class Personnage {
     }
 
     /**
+     * Un constructeur de recopie de la classe Personnage
      * permet de creer un personnage à partir d'un autre personnage existant
      * @param perso: un personnage exitant
      */
@@ -95,6 +99,7 @@ public class Personnage {
     }
     
     /**
+     * Un constructeur par défaut de la classe Personnage
      * permet de creer un personnage avec des valeurs par defaut
      */
     
@@ -110,76 +115,141 @@ public class Personnage {
     }
 
     // Accesseurs et modificateurs
+    
+    /**
+     * @return le nom du personnage
+     */
     public String getNom() {
         return nom;
     }
-
-    public void setNom(String n) {
-        this.nom = n;
-    }
+    
+    /** 
+     * @return le nombre de points de Vie
+     */
 
     public int getPtVie() {
         return ptVie;
     }
+    /**
+     * 
+     * @return le degré d'attaque
+     */
 
     public int getDegAtt() {
         return degAtt;
     }
+    /**
+     * 
+     * @return les points de parade
+     */
 
     public int getPtPar() {
         return ptPar;
     }
-
+    /**
+     * 
+     * @return  le pourcentage d'attaque
+     */
     public int getPageAtt() {
         return pageAtt;
     }
+    /**
+     * 
+     * @return  le pourcentage de parade
+     */
 
     public int getPagePar() {
         return pagePar;
     }
+    /**
+     * 
+     * @return la distance maximale d'attaque
+     */
 
     public int getDistAttMax() {
         return distAttMax;
     }
+    /**
+     * 
+     * @return la position du personnage
+     */
 
     public Point2D getPos() {
         return pos;
     }
+    
+    /**
+     * modifie le nom du personnage
+     * @param n : le nom du personnage
+     */
+
+    public void setNom(String n) {
+        this.nom = n;
+    }
+    
+    /**
+     * modifie les points de vie
+     * @param ptVie
+     */
 
     public void setPtVie(int ptVie) {
         this.ptVie = ptVie;
     }
+    /**
+     * modifie le degré d'attaque
+     * @param degAtt
+     */
 
     public void setDegAtt(int degAtt) {
         this.degAtt = degAtt;
     }
-
+    
+    /**
+     * modifie les points de parade
+     * @param ptPar
+     */
     public void setPtPar(int ptPar) {
         this.ptPar = ptPar;
     }
-
+    /**
+     * modifie le pourcentage d'attaque
+     * @param pageAtt
+     */
     public void setPageAtt(int pageAtt) {
         this.pageAtt = pageAtt;
     }
-
+    
+    /**
+     * modifie le pourcentage de parade
+     * @param pagePar
+     */
     public void setPagePar(int pagePar) {
         this.pagePar = pagePar;
     }
+    
+    /**
+     * modifie la distance d'attaque maximale
+     * @param distAttMax
+     */
 
     public void setDistAttMax(int distAttMax) {
         this.distAttMax = distAttMax;
     }
-
+    
+    /**
+     * modifie la position
+     * @param pos
+     */
     public void setPos(Point2D pos) {
         this.pos = pos;
     }
     
+    // Méthode de déplacement aléatoire
     /**
-     * methode deplace permet dde deplacer aléatoirement un objet sur une case adjacente
+     * methode deplace permet de deplacer aléatoirement un objet sur une case adjacente
      * de la ou il se trouve
      */
 
-    // Méthode de déplacement aléatoire
     public void deplace() {
         Random rand = new Random();
         // Déplacement aléatoire entre -1 et 1 sur les axes x et y
@@ -191,10 +261,11 @@ public class Personnage {
         pos.setY(pos.getY() + deltaY);
     }
 
+    // Methode affiche
     /**
      * methode affiche permet d'afficher les caractéristique d'un personnage
      */
-    //methode affiche
+    
     public void affiche() {
     System.out.println("Nom : " + nom);
     System.out.println("Points de vie : " + ptVie);
