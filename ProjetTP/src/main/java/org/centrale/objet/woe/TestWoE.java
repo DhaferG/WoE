@@ -16,31 +16,31 @@ public class TestWoE {
         monde.creeMondeAlea();
         // positions initiales de robin, peon and bugs
         System.out.println("position initiale de robin");
-        monde.robin.getPos().afficher();
-        //System.out.println("position initiale de peon");
-        //monde.peon.pos.afficher();
-        //System.out.println("position initiale de bugs");
-        //monde.bugs.pos.afficher();
+        monde.robin.pos.afficher();
+        System.out.println("position initiale de peon");
+        monde.peon.pos.afficher();
+        System.out.println("position initiale de bugs");
+        monde.bugs.pos.afficher();
         // position initiale de GuillaumeT
         System.out.println("position initiale de GuillaumeT");
-        monde.GuillaumeT.getPos().afficher();
+        monde.GuillaumeT.pos.afficher();
         
         // position deplacée aléatoirement de robin, peon and bugs
         System.out.println("position deplacée de robin");
         monde.robin.deplace();
-        monde.robin.getPos().afficher();
+        monde.robin.pos.afficher();
         
         //System.out.println("position deplacée de peon");
-        //monde.peon.deplace();
-        //monde.peon.pos.afficher();
+        monde.peon.deplace();
+        monde.peon.pos.afficher();
         
         //System.out.println("position deplacée de bugs");
-        //monde.bugs.deplace();
-        //monde.bugs.pos.afficher();
+        monde.bugs.deplace();
+        monde.bugs.pos.afficher();
         
         // position deplacée aléatoirement de GuillaumeT
         System.out.println("position deplacée de GuillaumeT");
-        monde.GuillaumeT.getPos().afficher();
+        monde.GuillaumeT.pos.afficher();
         
     
     }
