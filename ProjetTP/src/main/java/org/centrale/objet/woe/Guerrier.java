@@ -19,6 +19,6 @@ public class Guerrier extends Personnage {
         super();
     }
 
-    public void combattre(){
+    public void combattre(Creature c){
     }
 }
