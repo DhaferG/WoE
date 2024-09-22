@@ -26,5 +26,8 @@ public class Archer extends Personnage {
     public Archer() {
         super();
     }
+    
+    public void combattre(Creature c){
+    }
 }
 
