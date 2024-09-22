@@ -32,6 +32,16 @@ public class World {
      */
     public Lapin bugs;
     
+    /**
+     * grosBill un Guerrier dans le monde
+     */
+    public Guerrier grosBill;
+    
+    /**
+     * wolfie un monstre loup dans le monde
+     */
+    public Loup wolfie;
+    
     // constructeur du monde
     
     /**
@@ -43,6 +53,9 @@ public class World {
     this.GuillaumeT=new Archer(robin);
     this.peon= new Paysan();
     this.bugs= new Lapin();
+    this.grosBill= new Guerrier();
+    this.wolfie= new Loup();
+    
     }
 
     // Méthode pour créer un monde avec des positions aléatoires pour chaque protagoniste
@@ -54,13 +67,24 @@ public class World {
      */
     public void creeMondeAlea() {
         // generer une liste de positions aléatoires distinctes dans un espace 10x10
-        final int[] positions = new Random().ints(1, 10).distinct().limit(6).toArray();
+        final int[] positions = new Random().ints(1, 10).distinct().limit(10).toArray();
         // Attribuer les positions aux personnages
         robin.pos = new Point2D(positions[0], positions[1]);
         peon.pos = new Point2D(positions[2], positions[3]);
         bugs.pos = new Point2D(positions[4], positions[5]);
         GuillaumeT=new Archer(robin);
+        grosBill.pos= new Point2D(positions[6], positions[7]);
+        wolfie.pos= new Point2D(positions[8], positions[9]);
+        
  
+    }
+    
+    public void tourDeJeu(){
+    
+    }
+    
+    public void afficheWorld(){
+        
     }
 
 }

@@ -13,7 +13,7 @@ public class Archer extends Personnage {
 
     // Constructeurs
     public Archer(String n, int pV, int dA, int pPar, int paAtt, int paPar, int dMax, Point2D p, int nbFleches) {
-        super(n, pV, dA, pPar, paAtt, paPar, dMax, p);
+        super(pV, dA, pPar, paAtt, paPar, p, n, dMax);
         this.nbFleches = nbFleches;
     }
 

@@ -12,11 +12,12 @@ public class Paysan extends Personnage {
 
     // Constructeurs
     public Paysan(String n, int pV, int dA, int pPar, int paAtt, int paPar, int dMax, Point2D p) {
-        super(n, pV, dA, pPar, paAtt, paPar, dMax, p);
+        super(pV, dA, pPar, paAtt, paPar, p, n, dMax);
     }
 
     public Paysan(Paysan p) {
         super(p);
+        this.pos= new Point2D(p.pos);
     }
 
     public Paysan() {

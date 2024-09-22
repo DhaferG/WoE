@@ -60,14 +60,22 @@ public class Point2D {
     public void setPosition(int x, int y) {
         setX(x);
         setY(y);
-
     }
     
- 
     // Méthode pour translater le point (ajouter un incrément aux coordonnées)
     public void translater(int dx, int dy) {
         this.x += dx;
         this.y += dy;
+    }
+    // Méthode pour calculer la distance entre deux objets
+    /**
+     * 
+     * @param p : position de l'objet
+     * @return distance entre deux objets
+     */
+    public double distance(Point2D p){
+        double rc=Math.sqrt((this.x-p.x)*(this.x-p.x)+(this.y-p.y)*(this.y-p.y));
+        return(rc);
     }
     
 }

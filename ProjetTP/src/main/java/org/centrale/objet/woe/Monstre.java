@@ -10,37 +10,7 @@ import java.util.Random;
  * Classe monstre permet d'attribuer des caractéristiques à un monstre
  * @author nourkouki
  */
-public class Monstre {
-    //Attributs de la classe
-    /**
-     * Points de Vie du monstre
-     */
-    public int ptVie;
-    
-    /**
-     * Degré d'attaque
-     */
-    public int degAtt;
-    
-    /**
-     * Points de parade
-     */
-    public int ptPar;
-    
-    /**
-     * pourcentage d'attaque
-     */
-    public int pageAtt;
-    
-    /**
-     * pourcentage de parade
-     */
-    public int pagePar;
-    
-    /**
-     * position du monstre
-     */
-    public Point2D pos;
+public class Monstre extends Creature {
     
     // constructeurs
     /**
@@ -54,12 +24,7 @@ public class Monstre {
      * 
     */
     public Monstre(int pV, int dA, int pPar, int paAtt, int paPar, Point2D p) {
-        ptVie= pV;
-        degAtt = dA;
-        ptPar = pPar;
-        pageAtt = paAtt;
-        pagePar = paPar;
-        pos = p;
+        super(pV, dA, pPar, paAtt, paPar, p);
     }
     
     /**
@@ -70,12 +35,7 @@ public class Monstre {
      */
     
     public Monstre(Monstre m) {
-        this.ptVie=m.ptVie;
-        this.degAtt=m.degAtt;
-        this.ptPar=m.ptPar;
-        this.pageAtt=m.pageAtt;
-        this.pagePar=m.pagePar;
-        this.pos=m.pos;
+        super(m);
         
     }
     
@@ -85,9 +45,7 @@ public class Monstre {
      */
     
     public Monstre(){
-        
-    this.pos= new Point2D();
-    
+        super();
     }
     
     // Accesseurs et modificateurs

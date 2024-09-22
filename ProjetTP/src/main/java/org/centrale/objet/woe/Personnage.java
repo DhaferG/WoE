@@ -11,7 +11,7 @@ import java.util.Random;
  * @author nourkouki
  */
 
-public class Personnage {
+public class Personnage extends Creature {
     
     //Attributs de la classe
     
@@ -19,49 +19,17 @@ public class Personnage {
      * le nom du personnage
      */
     public String nom;
-    
-    /**
-     * Points de Vie du personnage
-     */
-    public int ptVie;
-    
-    /**
-     * Degré d'attaque
-     */
-    public int degAtt;
-    
-    /**
-     * Points de parade
-     */
-    public int ptPar;
-    
-    /**
-     * pourcentage d'attaque
-     */
-    public int pageAtt;
-    
-    /**
-     * pourcentage de parade
-     */
-    public int pagePar;
-    
     /**
      * distance d'attaque maximale
      */
     public int distAttMax;
     
-    
-    /**
-     * position du personnage
-     */
-    public Point2D pos;
-
     // Constructeurs
     /**
      * Un constructeur de la classe Personnage avec 8 parametres
      * @param n: nom du personnage
-     * @param pVie: les points de vie du personnage
-     * @param dAtt: degré d'attaque
+     * @param pV: les points de vie du personnage
+     * @param dA: degré d'attaque
      * @param pPar: points de parade
      * @param paAtt: Pourcentage d'attaque
      * @param paPar: pourcentage de parade
@@ -70,15 +38,10 @@ public class Personnage {
      * 
     */
     
-    public Personnage(String n, int pVie, int dAtt, int pPar, int paAtt, int paPar, int dMax, Point2D p) {
+    public Personnage(int pV, int dA, int pPar, int paAtt, int paPar, Point2D p, String n, int dMax) {
+        super(pV, dA, pPar, paAtt, paPar, p);
         this.nom = n;
-        this.ptVie = pVie;
-        this.degAtt = dAtt;
-        this.ptPar = pPar;
-        this.pageAtt = paAtt;
-        this.pagePar = paPar;
         this.distAttMax = dMax;
-        this.pos = p;
     }
 
     /**
@@ -88,14 +51,9 @@ public class Personnage {
      */
     
     public Personnage(Personnage perso) {
-        this.nom = perso.nom;
-        this.ptVie = perso.ptVie;
-        this.degAtt = perso.degAtt;
-        this.ptPar = perso.ptPar;
-        this.pageAtt = perso.pageAtt;
-        this.pagePar = perso.pagePar;
-        this.distAttMax = perso.distAttMax;
-        this.pos = perso.pos;
+        super(perso);
+        this.nom=perso.nom;
+        this.distAttMax=perso.distAttMax;
     }
     
     /**
@@ -104,14 +62,7 @@ public class Personnage {
      */
     
     public Personnage() {
-        this.nom = "";
-        this.ptVie = 0;
-        this.degAtt = 0;
-        this.ptPar = 0;
-        this.pageAtt = 0;
-        this.pagePar = 0;
-        this.distAttMax = 0;
-        this.pos = new Point2D();
+        super();
     }
 
     // Accesseurs et modificateurs

@@ -18,6 +18,7 @@ public class Lapin extends Monstre {
     
     public Lapin(Lapin l){
         super(l);
+        this.pos= new Point2D(l.pos);
     }
     
     public Lapin(){
