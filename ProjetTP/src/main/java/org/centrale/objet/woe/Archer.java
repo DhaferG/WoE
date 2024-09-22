@@ -20,11 +20,11 @@ public class Archer extends Personnage {
     public Archer(Archer a) {
         super(a);
         this.nbFleches = a.nbFleches;
+        this.pos= new Point2D(a.pos);
     }
 
     public Archer() {
         super();
-        this.nbFleches = 0;
     }
 }
 
