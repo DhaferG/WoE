@@ -11,11 +11,12 @@ public class Epee extends Objet{
      * degAtt: pts de Vie que la potion donne
      */
     public int degAtt;
-    /*
-     * Constructeur à partir de deux paramètres et la classe Objet
-     * pos: position de l'objet
-     * pts: Points expérience gagnés grâce à l'objet - Peut être ignoré pour le moment
-     */
+   /**
+    * Constructeur à partir de deux paramètres et la classe Objet
+    * @param pos: position de l'objet
+    * @param pts: Points expérience gagnés grâce à l'objet - Peut être ignoré pour le moment
+    * @param degAtt: pts de Vie que la potion donne
+    */
     public Epee(Point2D pos,int pts,int degAtt) {
         super(pos, pts);
         this.degAtt = degAtt;
