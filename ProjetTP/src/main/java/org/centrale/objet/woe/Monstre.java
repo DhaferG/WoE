@@ -7,7 +7,7 @@ package org.centrale.objet.woe;
 import java.util.Random;
 
 /**
- * Classe monstre permet d'attribuer des caractéristiques à un monstre
+ * Classe monstre sous classe de Creature permet d'attribuer des caractéristiques à un monstre
  * @author nourkouki
  * @author dghanmi
  */
