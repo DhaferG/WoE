@@ -6,4 +6,16 @@ public class PotionSoin extends Objet{
         super(pos, pts);
         this.health = health;
     }
+    
+    /** 
+     * @param c
+     */
+    public void consume(Personnage c){
+        if ((c.pos.getX()==this.pos.getX()) && (c.pos.getX()==this.pos.getX())){
+            c.ptVie+=this.health;
+        }
+        else{
+            System.out.println("Potion not found");
+        }
+    }
 }

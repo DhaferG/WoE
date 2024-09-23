@@ -9,6 +9,7 @@ import java.util.Random;
 /**
  * la classe Personnage permet d'attribuer des caractéristiques à un personnage
  * @author nourkouki
+ * @author dghanmi
  */
 
 public class Personnage extends Creature {

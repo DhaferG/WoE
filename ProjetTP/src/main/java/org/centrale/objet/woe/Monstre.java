@@ -9,6 +9,7 @@ import java.util.Random;
 /**
  * Classe monstre permet d'attribuer des caractéristiques à un monstre
  * @author nourkouki
+ * @author dghanmi
  */
 public class Monstre extends Creature {
     
