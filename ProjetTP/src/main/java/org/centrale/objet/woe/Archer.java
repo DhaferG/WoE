@@ -7,7 +7,7 @@ package org.centrale.objet.woe;
 import java.util.Random;
 
 /**
- * la classe Archer définit le personnage Archer
+ * la classe Archer sous classe de Personnage définit le personnage Archer
  * @author nourkouki
  * @author dghanmi
  */
