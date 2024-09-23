@@ -7,8 +7,9 @@ package org.centrale.objet.woe;
 import java.util.Random;
 
 /**
- * Classe World : permet la creation et la manipulation d'un monde
+ *
  * @author nourkouki
+ * @author dghanmi
  */
 public class World {
     //Attributs de la classe
@@ -42,6 +43,7 @@ public class World {
      */
     public Loup wolfie;
     
+    public PotionSoin potion;
     // constructeur du monde
     
     /**
@@ -55,6 +57,7 @@ public class World {
     this.bugs= new Lapin();
     this.grosBill= new Guerrier();
     this.wolfie= new Loup();
+    this.potion= new PotionSoin(new Point2D(5,5), 0, 50);
     
     }
 
@@ -67,7 +70,7 @@ public class World {
      */
     public void creeMondeAlea() {
         // generer une liste de positions aléatoires distinctes dans un espace 10x10
-        final int[] positions = new Random().ints(1, 10).distinct().limit(10).toArray();
+        final int[] positions = new Random().ints(1, 20).distinct().limit(10).toArray(); //bug with 1 to 9 as bounds for 10 distinct ints
         // Attribuer les positions aux personnages
         robin.pos = new Point2D(positions[0], positions[1]);
         peon.pos = new Point2D(positions[2], positions[3]);
@@ -75,7 +78,7 @@ public class World {
         GuillaumeT=new Archer(robin);
         grosBill.pos= new Point2D(positions[6], positions[7]);
         wolfie.pos= new Point2D(positions[8], positions[9]);
-        
+
  
     }
     

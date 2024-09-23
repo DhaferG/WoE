@@ -1,5 +1,10 @@
 package org.centrale.objet.woe;
 
+/**
+ *
+ * @author nourkouki
+ * @author dghanmi
+ */
 public class Objet {
     public Point2D pos;
     public int XP;

@@ -7,6 +7,7 @@ package org.centrale.objet.woe;
 /**
  *
  * @author nourkouki
+ * @author dghanmi
  */
 public class Point2D {
     // Attributs privés
@@ -31,6 +32,10 @@ public class Point2D {
         this.y = p.y;
     }
 
+    
+    /** 
+     * @return int
+     */
     // Accesseur pour l'attribut x
     public int getX() {
         return x;
