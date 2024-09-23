@@ -7,8 +7,13 @@ package org.centrale.objet.woe;
 /**
  *
  * @author nourkouki
+ * @author dghanmi
  */
 public class TestPoint2D {
+    
+    /** 
+     * @param args
+     */
     public static void main(String[] args){
         Point2D O = new Point2D();
         Point2D i = new Point2D(1, 0);

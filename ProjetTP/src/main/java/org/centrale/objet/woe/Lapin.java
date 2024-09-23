@@ -7,6 +7,7 @@ package org.centrale.objet.woe;
 /**
  *
  * @author nourkouki
+ * @author dghanmi
  */
 public class Lapin extends Monstre {
     

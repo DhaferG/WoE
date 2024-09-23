@@ -7,6 +7,7 @@ package org.centrale.objet.woe;
 /**
  *
  * @author nourkouki
+ * @author dghanmi
  */
 public class Paysan extends Personnage {
 
