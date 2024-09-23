@@ -1,7 +1,7 @@
 package org.centrale.objet.woe;
 
 /**
- *
+ * Classe Objet gérant les objets
  * @author nourkouki
  * @author dghanmi
  */

@@ -5,7 +5,7 @@
 package org.centrale.objet.woe;
 
 /**
- *
+ * la classe Creature permet de gérer les créatures
  * @author nourkouki
  * @author dghanmi
  */
@@ -17,7 +17,7 @@ public class Creature {
     public int ptVie;
     
     /**
-     * Degré d'attaque
+     * Degats d'attaque
      */
     public int degAtt;
     

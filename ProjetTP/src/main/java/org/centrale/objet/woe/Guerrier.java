@@ -3,6 +3,7 @@ package org.centrale.objet.woe;
 import java.util.Random;
 
 /**
+ * sous classe de personnage gérant les guerriers
  * @author nourkouki
  * @author dghanmi
  */
@@ -13,7 +14,7 @@ public class Guerrier extends Personnage {
      * Un constructeur de la classe Guerrier avec 8 parametres
      * @param n: nom du personnage
      * @param pV: les points de vie du personnage
-     * @param dA: degré d'attaque
+     * @param dA: degats d'attaque
      * @param pPar: points de parade
      * @param paAtt: Pourcentage d'attaque
      * @param paPar: pourcentage de parade

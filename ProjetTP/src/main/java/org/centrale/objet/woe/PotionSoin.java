@@ -1,5 +1,11 @@
 package org.centrale.objet.woe;
 
+/**
+ * sous classe d'objet gérant les potions de soins
+ * @author nourkouki
+ * @author dghanmi
+ */
+
 public class PotionSoin extends Objet{
     
     /**

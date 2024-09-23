@@ -1,7 +1,7 @@
 package org.centrale.objet.woe;
 
 /**
- *
+ * sous classe de Monstre gérant les Loups
  * @author nourkouki
  * @author dghanmi
  */
@@ -10,7 +10,7 @@ public class Loup extends Monstre {
     /**
      * Un constructeur de la classe Monstre avec 6 parametres
      * @param pV: points de vie
-     * @param dA: degré d'attaque
+     * @param dA: degats d'attaque
      * @param pPar: points de parade
      * @param paAtt: Pourcentage d'attaque
      * @param paPar: pourcentage de parade

@@ -16,7 +16,7 @@ public class Paysan extends Personnage {
      * 
      * @param n: nom du personnage
      * @param pV: les points de vie du personnage
-     * @param dA: degré d'attaque
+     * @param dA: degats d'attaque
      * @param pPar: points de parade
      * @param paAtt: Pourcentage d'attaque
      * @param paPar: pourcentage de parade

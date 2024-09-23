@@ -17,7 +17,7 @@ public class Monstre extends Creature {
     /**
      * Un constructeur de la classe Monstre avec 6 parametres
      * @param pV: points de vie
-     * @param dA: degré d'attaque
+     * @param dA: degats d'attaque
      * @param pPar: points de parade
      * @param paAtt: Pourcentage d'attaque
      * @param paPar: pourcentage de parade
