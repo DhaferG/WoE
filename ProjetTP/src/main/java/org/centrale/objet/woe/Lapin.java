@@ -5,7 +5,7 @@
 package org.centrale.objet.woe;
 
 /**
- * Classe Lapin définit les caractéristiques d'un Monstre Lapin
+ * Classe Lapin sous classe de Monstre définit les caractéristiques d'un Monstre Lapin
  * @author nourkouki
  * @author dghanmi
  */
