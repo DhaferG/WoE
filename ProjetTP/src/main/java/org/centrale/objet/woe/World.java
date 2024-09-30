@@ -14,9 +14,17 @@ import java.util.ArrayList;
 
 public class World {
     //Attributs de la classe
-    
+    /**
+     * liste de monstres
+     */
     public ArrayList<Monstre> monstres;
+    /**
+     * liste de personnages
+     */
     public ArrayList<Personnage> personnages;
+    /**
+     * liste d'objets
+     */
     public ArrayList<Objet> objets;
     
     /**
@@ -27,8 +35,13 @@ public class World {
      * Taille par défaut d'un monde carré 50x50
      */
     
-    private static final int TAILLE_MONDE = 50; 
-
+    private static final int TAILLE_MONDE = 50;
+    
+    /**
+     * méthode permettant d'ajouter des personnages de type Archer, Guerrier et Paysan au tableau personnages
+     * @param a: tableau personnages
+     * @param u: le nombre d'éléments dans le tableau
+     */
     public void RandomCharacters(ArrayList<Personnage> a, int u){
         Random rand = new Random();
         int x = rand.nextInt(u);
@@ -51,6 +64,11 @@ public class World {
                 }
         }
     }
+    /**
+     * méthode permettant d'ajouter des monstres de type Lapin et Loup au tableau monstres
+     * @param a: tableau monstres
+     * @param u: le nombre d'éléments dans le tableau
+     */
     public void RandomMonsters(ArrayList<Monstre> a, int u){
         Random rand = new Random();
         int x = rand.nextInt(u)+5;
@@ -64,6 +82,11 @@ public class World {
             }
         }
     }
+    /**
+     * méthode permettant d'ajouter des objets
+     * @param a: tableau objets
+     * @param u: le nombre d'éléments dans le tableau
+     */
     public void RandomObjects(ArrayList<Objet> a, int u){
         Random rand = new Random();
         int x = rand.nextInt(u);
