@@ -19,8 +19,10 @@ public class TestWoE {
         
         World monde= new World();
         monde.creeMondeAlea();
+        monde.initialiserEspace();
+        
         // positions initiales de robin, peon and bugs
-        System.out.println("position initiale de robin");
+        /* System.out.println("position initiale de robin");
         monde.robin.pos.afficher();
         System.out.println("position initiale de peon");
         monde.peon.pos.afficher();
@@ -94,7 +96,7 @@ public class TestWoE {
         monde.potion.pos.afficher();
         monde.potion.consume(monde.grosBill);
         System.out.println("Guerrier stats after consuming potion:");
-        monde.grosBill.affiche();
+        monde.grosBill.affiche(); */
 
     }
 
