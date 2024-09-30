@@ -7,14 +7,32 @@ package org.centrale.objet.woe;
 import java.util.Random;
 
 /**
- *
+ * la classe Archer sous classe de Personnage définit le personnage Archer
  * @author nourkouki
  * @author dghanmi
  */
+
+
 public class Archer extends Personnage {
+    //Attributs
+    /**
+     * le nombre de fleches de l'Archer
+     */
     public int nbFleches;
 
     // Constructeurs
+    /**
+     * 
+     * @param n: du personnage
+     * @param pV: les points de vie du personnage
+     * @param dA: degats d'attaque
+     * @param pPar: points de parade
+     * @param paAtt: Pourcentage d'attaque
+     * @param paPar: pourcentage de parade
+     * @param dMax: distance maximale d'attaque
+     * @param p: position du personnage 
+     * @param nbFleches : nombre de fleches
+     */
     public Archer(String n, int pV, int dA, int pPar, int paAtt, int paPar, int dMax, Point2D p, int nbFleches) {
         super(pV, dA, pPar, paAtt, paPar, p, n, dMax);
         this.nbFleches = nbFleches;
@@ -32,7 +50,8 @@ public class Archer extends Personnage {
     
     
     /** 
-     * @param c
+     * Methode combattre définit le systeme de combat 
+     * @param c : une creature
      */
     public void combattre(Creature c){
         double d = this.pos.distance(c.pos);

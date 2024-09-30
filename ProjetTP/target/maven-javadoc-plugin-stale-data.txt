@@ -1,0 +1,44 @@
+-J-Duser.language=
+-J-Duser.country=
+@options
+@packages
+-encoding
+'UTF-8'
+-protected
+-source
+'11'
+-sourcepath
+'/Users/nourkouki/NetBeansProjects/infosi-tp-poo-ghanmi_kouki/ProjetTP/src/main/java'
+-author
+-bottom
+'Copyright &#169; 2024. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'/Users/nourkouki/NetBeansProjects/infosi-tp-poo-ghanmi_kouki/ProjetTP/target/reports/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'ProjetTP 1.0-SNAPSHOT API'
+-linkoffline
+'https://docs.oracle.com/en/java/javase/11/docs/api' '/Users/nourkouki/NetBeansProjects/infosi-tp-poo-ghanmi_kouki/ProjetTP/target/javadoc-bundle-options'
+-use
+-version
+-windowtitle
+'ProjetTP 1.0-SNAPSHOT API'
+org.centrale.objet.woe
+/Users/nourkouki/NetBeansProjects/infosi-tp-poo-ghanmi_kouki/ProjetTP/src/main/java = 1726818825933
+/Users/nourkouki/NetBeansProjects/infosi-tp-poo-ghanmi_kouki/ProjetTP/target/reports/apidocs/tag-search-index.js = 1727108159485
+/Users/nourkouki/NetBeansProjects/infosi-tp-poo-ghanmi_kouki/ProjetTP/target/reports/apidocs/overview-tree.html = 1727108159463
+/Users/nourkouki/NetBeansProjects/infosi-tp-poo-ghanmi_kouki/ProjetTP/target/reports/apidocs/module-search-index.js = 1727108159480
+/Users/nourkouki/NetBeansProjects/infosi-tp-poo-ghanmi_kouki/ProjetTP/target/reports/apidocs/index.html = 1727108159496
+/Users/nourkouki/NetBeansProjects/infosi-tp-poo-ghanmi_kouki/ProjetTP/target/reports/apidocs/.DS_Store = 1726932174706
+/Users/nourkouki/NetBeansProjects/infosi-tp-poo-ghanmi_kouki/ProjetTP/target/reports/apidocs/package-search-index.js = 1727108159481
+/Users/nourkouki/NetBeansProjects/infosi-tp-poo-ghanmi_kouki/ProjetTP/target/reports/apidocs/index-all.html = 1727108159494
+/Users/nourkouki/NetBeansProjects/infosi-tp-poo-ghanmi_kouki/ProjetTP/target/reports/apidocs/allpackages-index.html = 1727108159478
+/Users/nourkouki/NetBeansProjects/infosi-tp-poo-ghanmi_kouki/ProjetTP/target/reports/apidocs/member-search-index.js = 1727108159485
+/Users/nourkouki/NetBeansProjects/infosi-tp-poo-ghanmi_kouki/ProjetTP/target/reports/apidocs/help-doc.html = 1727108159500
+/Users/nourkouki/NetBeansProjects/infosi-tp-poo-ghanmi_kouki/ProjetTP/target/reports/apidocs/element-list = 1727108159429
+/Users/nourkouki/NetBeansProjects/infosi-tp-poo-ghanmi_kouki/ProjetTP/target/reports/apidocs/search.html = 1727108159495
+/Users/nourkouki/NetBeansProjects/infosi-tp-poo-ghanmi_kouki/ProjetTP/target/reports/apidocs/allclasses-index.html = 1727108159476
+/Users/nourkouki/NetBeansProjects/infosi-tp-poo-ghanmi_kouki/ProjetTP/target/reports/apidocs/type-search-index.js = 1727108159482

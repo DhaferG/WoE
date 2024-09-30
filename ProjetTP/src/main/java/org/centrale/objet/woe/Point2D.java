@@ -5,7 +5,7 @@
 package org.centrale.objet.woe;
 
 /**
- *
+ * Classe gérant les coordonées de position de l'ensemble des créatures de WoE
  * @author nourkouki
  * @author dghanmi
  */

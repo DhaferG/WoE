@@ -3,16 +3,33 @@ package org.centrale.objet.woe;
 import java.util.Random;
 
 /**
- *
+ * sous classe de personnage gérant les guerriers
  * @author nourkouki
  * @author dghanmi
  */
 
 public class Guerrier extends Personnage {
+    // Constructeurs
+    /**
+     * Un constructeur de la classe Guerrier avec 8 parametres
+     * @param n: nom du personnage
+     * @param pV: les points de vie du personnage
+     * @param dA: degats d'attaque
+     * @param pPar: points de parade
+     * @param paAtt: Pourcentage d'attaque
+     * @param paPar: pourcentage de parade
+     * @param dMax: distance maximale d'attaque
+     * @param p: position du personnage 
+     * 
+    */
     public Guerrier(String n, int pV, int dA, int pPar, int paAtt, int paPar, int dMax, Point2D p) {
         super(pV, dA, pPar, paAtt, paPar, p, n, dMax);
     }
-    
+     /**
+     * Un constructeur de recopie de la classe Guerrier
+     * permet de creer un personnage à partir d'un autre guerrier existant
+     * @param g: un personnage guerrier
+     */
     public Guerrier(Guerrier g) {
         super(g);
         this.pos= new Point2D(g.pos);
@@ -24,7 +41,8 @@ public class Guerrier extends Personnage {
 
     
     /** 
-     * @param c
+     * Methode combattre permettant Guerrier de combattre des créatures c
+     * @param c: créature à combattre
      */
     public void combattre(Creature c){
         double d = this.pos.distance(c.pos);
