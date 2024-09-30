@@ -18,6 +18,27 @@ public class TestWoE {
     public static void main(String[] args){
         
         World monde= new World();
+        int[] n = {100,1000,10000,100000,1000000};
+        for (int i:n){
+            monde.creeMondeAlea(i);
+            int hp=0;
+            int hpll=0;
+            long start = System.nanoTime();
+            for (int j=0;j<monde.creatures.size();j++){
+                hp+=monde.creatures.get(j).ptVie;
+            }
+            long end = System.nanoTime();
+            System.out.println("Temps pour le parcours pour un ArrayList avec "+i+" personnages est :"+(end-start));
+            long startll = System.nanoTime();
+            for (int j=0;j<monde.creaturesll.size();j++){
+                hp+=monde.creaturesll.get(j).ptVie;
+            }
+            long endll = System.nanoTime();
+            System.out.println("Temps pour le parcours pour LinkedList avec "+i+" personnages est :"+(endll-startll));
+
+        }
+        
+        //monde.initialiserEspace();
         
         // positions initiales de robin, peon and bugs
         /* System.out.println("position initiale de robin");
@@ -95,6 +116,8 @@ public class TestWoE {
         monde.potion.consume(monde.grosBill);
         System.out.println("Guerrier stats after consuming potion:");
         monde.grosBill.affiche(); */
+
+    
 
     //     // Testing combat logic
     //     // Close range combat
