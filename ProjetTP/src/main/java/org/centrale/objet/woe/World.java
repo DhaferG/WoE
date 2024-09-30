@@ -6,6 +6,9 @@ package org.centrale.objet.woe;
 
 import java.util.Random;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
 /**
  *
  * @author nourkouki
@@ -26,6 +29,11 @@ public class World {
      * liste d'objets
      */
     public ArrayList<Objet> objets;
+    /*
+     * Array List and linked list for performance comparison
+     */
+    public ArrayList<Creature> creatures ;
+    public LinkedList<Creature> creaturesll;
     
     /**
      * Matrice pour représenter l'espace de jeu
@@ -61,7 +69,7 @@ public class World {
             }
             else{
                 a.add(new Paysan());
-                }
+            }
         }
     }
     /**
@@ -101,6 +109,30 @@ public class World {
         }
     }
 
+    public void RandomCreature(List<Creature> a, int u){
+        Random rand = new Random();
+        int x = u;//rand.nextInt(u);
+        for (int i=0;i<x;i++){
+            int d = rand.nextInt(100);
+            if (d<20){
+                Guerrier g = new Guerrier();
+                g.ptVie=100;
+                g.nom="Guerrier";
+                a.add(g);
+            }
+            else if (d<50){
+                Archer arch =new Archer();
+                arch.ptVie=80;
+                arch.nom="Archer";
+                a.add(arch);
+            }
+            else{
+                a.add(new Paysan());
+            }
+        }
+    }
+
+
     
     // constructeur du monde
     
@@ -113,6 +145,9 @@ public class World {
         this.personnages = new ArrayList<>();
         this.monstres = new ArrayList<>();
         this.objets = new ArrayList<>();
+        this.creatures = new ArrayList<>();
+        this.creaturesll = new LinkedList<>();
+        
         RandomCharacters(personnages, 100); 
         RandomMonsters(monstres, 100);
         RandomObjects(objets,10);
@@ -137,8 +172,9 @@ public class World {
      * pour chaque protagoniste dans un espace 50x50
      * Les positions sont attribuées de manière aléatoire aux personnages.
      */
-    public void creeMondeAlea() {
-        final int[] positions = new Random().ints(0, 50).limit(100).toArray();
+    public void creeMondeAlea(int n) {
+        // generer une liste de positions aléatoires distinctes dans un espace 10x10
+         final int[] positions = new Random().ints(1, 20).distinct().limit(10).toArray(); //bug with 1 to 9 as bounds for 10 distinct ints
         // Attribuer les positions aux personnages
         int i=0;
         for (Personnage p : personnages) {
@@ -152,6 +188,8 @@ public class World {
             m.pos = new Point2D(positions[j], positions[j+1]);
             j=j+1;
     }
+    RandomCreature(this.creatures, n);
+    RandomCreature(this.creaturesll, j);
 }
 
 

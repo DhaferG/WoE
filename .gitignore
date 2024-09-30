@@ -1,3 +1,4 @@
 *.class
 .vscode/*
 *.lst
+.DS_Store
