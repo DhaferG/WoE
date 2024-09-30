@@ -18,8 +18,6 @@ public class TestWoE {
     public static void main(String[] args){
         
         World monde= new World();
-        monde.creeMondeAlea();
-        monde.initialiserEspace();
         
         // positions initiales de robin, peon and bugs
         /* System.out.println("position initiale de robin");
@@ -98,8 +96,6 @@ public class TestWoE {
         System.out.println("Guerrier stats after consuming potion:");
         monde.grosBill.affiche(); */
 
-    }
-
     //     // Testing combat logic
     //     // Close range combat
     //     monde.robin.setPos(new Point2D(0,0));
@@ -149,36 +145,53 @@ public class TestWoE {
     //     System.out.println("Guerrier stats after consuming potion:");
     //     monde.grosBill.affiche();
     
-    int characterCount=monde.characters.size();
-    int monsterCount = monde.monsters.size();
-    int p=0;
-    int g=0;
-    int a=0;
-    int l=0;
-    int L=0;
-    int totalHP=0;
-    for (int i=0;i<characterCount;i++){
-        totalHP+=monde.characters.get(i).ptVie;
-        if (monde.characters.get(i) instanceof Paysan){
-            p++;
+     /*   int characterCount=monde.personnages.size();
+        int monsterCount = monde.monstres.size();
+        int p=0;
+        int g=0;
+        int a=0;
+        int l=0;
+        int L=0;
+        int totalHP=0;
+        for (int i=0;i<characterCount;i++){
+            totalHP+=monde.personnages.get(i).ptVie;
+            if (monde.personnages.get(i) instanceof Paysan){
+                p++;
+            }
+            else if (monde.personnages.get(i) instanceof Archer){
+                a++;
+            }
+            else{
+                g++;
+            }
         }
-        else if (monde.characters.get(i) instanceof Archer){
-            a++;
+        for (int i=0;i<monsterCount;i++){
+            if (monde.monstres.get(i) instanceof Lapin){
+                L++;
+            }
+            else{
+                l++;
+            }
         }
-        else{
-            g++;
-        }
-    }
-    for (int i=0;i<monsterCount;i++){
-        if (monde.monsters.get(i) instanceof Lapin){
-            L++;
-        }
-        else{
-            l++;
-        }
-    }
-    System.out.println("Il existe "+p+" paysans, "+a+" archers, "+g+" guerries, "+L+" loups et "+l+" lapins.");
-    System.out.println("Le total des pts vie des personnages est: "+totalHP);
-    }
+        System.out.println("Il existe "+p+" paysans, "+a+" archers, "+g+" guerries, "+L+" loups et "+l+" lapins.");
+        System.out.println("Le total des pts vie des personnages est: "+totalHP);
+       */ 
+    /*
+        illustration que deux personnages ne sont pas sur la meme case
+        */
     
+        monde.creeMondeAlea();
+        for (Personnage p: monde.personnages) {
+            p.pos.afficher();
+        }
+        monde.initialiserEspace();
+        //monde.afficheWorld();
+        
+        for (Personnage personnage : monde.personnages) {
+            monde.marquerPosition(personnage);
+        
+        }
+        monde.afficheWorld();
+    
+}
 }
