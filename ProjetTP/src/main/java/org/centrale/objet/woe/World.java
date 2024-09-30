@@ -134,6 +134,10 @@ public class World {
 
     
     // Marque la position comme occupée en fonction du type d'objet
+    /**
+     * méthode permettant de marquer la position d'un protagoniste dans l'espace de jeu
+     * @param c 
+     */
     public void marquerPosition(Creature c) {
         int x = (int) c.pos.getX();
         int y = (int) c.pos.getY();
@@ -160,7 +164,9 @@ public class World {
     public void tourDeJeu(){
     
     }
-    
+    /**
+     * méthode permettant d'afficher la grille de l'espace de jeu (la matrice)
+     */
     public void afficheWorld(){
         for (int i = 0; i < TAILLE_MONDE; i++) {
         for (int j = 0; j < TAILLE_MONDE; j++) {
