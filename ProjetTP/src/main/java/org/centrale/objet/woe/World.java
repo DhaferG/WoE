@@ -6,11 +6,10 @@ package org.centrale.objet.woe;
 
 import java.util.Random;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 /**
- *
+ * La classe World permet de creer un monde
  * @author nourkouki
  * @author dghanmi
  */
@@ -44,6 +43,48 @@ public class World {
      */
     
     private static final int TAILLE_MONDE = 50;
+    
+    // Getter pour accéder à taille_monde
+    public int getTailleMonde() {
+        return TAILLE_MONDE;
+    }
+    
+    /**
+     * méthode permettant d'ajouter des créatures au tableau crétaure
+     * @param c: tableau personnages
+     * @param u: le nombre d'éléments dans le tableau
+     */
+    
+    public void RandomCreatures(ArrayList<Creature> c, int u){
+       Random rand= new Random();
+       int x = rand.nextInt(u - 50) + 51; // Génére toujours au moins 51 créatures
+        for (int i=0;i<x;i++){
+            int d = rand.nextInt(100);
+            // Génération aléatoire de personnages
+            if (d<20){
+                Guerrier g = new Guerrier();
+                g.ptVie=100;
+                g.nom="Guerrier";
+                c.add(g);
+            }
+            else if (d<50){
+                Archer arch =new Archer();
+                arch.ptVie=80;
+                arch.nom="Archer";
+                c.add(arch);
+            }
+            else if (d<70){
+                c.add(new Paysan());
+            }
+            // Génération aléatoire de personnages
+            else if (d<85){
+                c.add(new Loup());
+            } else {
+                c.add(new Lapin());
+            }
+          
+        }
+    }
     
     /**
      * méthode permettant d'ajouter des personnages de type Archer, Guerrier et Paysan au tableau personnages
@@ -90,6 +131,7 @@ public class World {
             }
         }
     }
+    
     /**
      * méthode permettant d'ajouter des objets
      * @param a: tableau objets
@@ -97,7 +139,7 @@ public class World {
      */
     public void RandomObjects(ArrayList<Objet> a, int u){
         Random rand = new Random();
-        int x = rand.nextInt(u);
+        int x = rand.nextInt(u - 5) + 5; // Générer au moins 5 objets
         for (int i=0;i<x;i++){
             int d = rand.nextInt(100);
             if (d<30){
@@ -148,8 +190,7 @@ public class World {
         this.creatures = new ArrayList<>();
         this.creaturesll = new LinkedList<>();
         
-        RandomCharacters(personnages, 100); 
-        RandomMonsters(monstres, 100);
+        RandomCreatures(creatures, 100); 
         RandomObjects(objets,10);
     }
     /**
@@ -171,10 +212,11 @@ public class World {
      * méthode permet de créer un monde avec des positions aléatoires distinctes 
      * pour chaque protagoniste dans un espace 50x50
      * Les positions sont attribuées de manière aléatoire aux personnages.
+     * @param n: nombre de personnage
      */
     public void creeMondeAlea(int n) {
         // generer une liste de positions aléatoires distinctes dans un espace 10x10
-         final int[] positions = new Random().ints(1, 20).distinct().limit(10).toArray(); //bug with 1 to 9 as bounds for 10 distinct ints
+        final int[] positions = new Random().ints(0, 51).limit(100).toArray();
         // Attribuer les positions aux personnages
         int i=0;
         for (Personnage p : personnages) {
@@ -223,8 +265,9 @@ public class World {
     }
     
     public void tourDeJeu(){
-    
     }
+    
+    
     /**
      * méthode permettant d'afficher la grille de l'espace de jeu (la matrice)
      */

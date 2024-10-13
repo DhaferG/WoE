@@ -55,6 +55,7 @@ public class Personnage extends Creature {
         super(perso);
         this.nom=perso.nom;
         this.distAttMax=perso.distAttMax;
+        this.pos= new Point2D(perso.pos);
     }
     
     /**

@@ -10,7 +10,7 @@ public class Epee extends Objet{
      * Attribut de la class
      * degAtt: pts de Vie que la potion donne
      */
-    public int degAtt;
+    private int degAtt;
    /**
     * Constructeur à partir de deux paramètres et la classe Objet
     * @param pos: position de l'objet

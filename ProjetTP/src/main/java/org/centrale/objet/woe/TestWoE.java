@@ -17,7 +17,42 @@ public class TestWoE {
      */
     public static void main(String[] args){
         
-        World monde= new World();
+        // Création du monde
+        World world = new World();
+        System.out.println("cratures generées:");
+        for (Creature creature : world.creatures) {
+            System.out.println(creature.getClass().getSimpleName());
+            System.out.println("--Position:");
+            creature.pos.afficher();
+        }
+        System.out.println("objets générés:");
+        for (Objet objet: world.objets) {
+            System.out.println(objet.getClass().getSimpleName());
+            System.out.println("--Position:");
+            objet.pos.afficher();
+        }
+        // Affichage du nombre total de créatures et d'objets
+        System.out.println("\nTotal de créatures générées: " + world.creatures.size());
+        System.out.println("Total d'objets générés: " + world.objets.size());
+            
+        
+
+        // Création du joueur avec la taille du monde
+        Joueur joueurHumain = new Joueur(world);
+        Creature c = new Monstre(); // Créature ennemie
+
+        // Récupération du personnage choisi
+        Personnage perso = joueurHumain.getPersonnage();
+        perso.affiche(); // Affiche les détails du personnage
+        
+        // Boucle de jeu pour effectuer plusieurs tours
+        for (int i = 0; i < 5; i++) {
+            System.out.println("Tour " + (i+1));
+            joueurHumain.choixDuJeu(c); // Chaque tour, le joueur choisit entre se déplacer ou combattre
+        }
+    }
+        
+       /* World monde= new World();
         int[] n = {100,1000,10000,100000,1000000};
         for (int i:n){
             monde.creeMondeAlea(i);
@@ -36,12 +71,12 @@ public class TestWoE {
             long endll = System.nanoTime();
             System.out.println("Temps pour le parcours pour LinkedList avec "+i+" personnages est :"+(endll-startll));
 
-        }
+        }*/
         
         //monde.initialiserEspace();
         
         // positions initiales de robin, peon and bugs
-        /* System.out.println("position initiale de robin");
+        /*System.out.println("position initiale de robin");
         monde.robin.pos.afficher();
         System.out.println("position initiale de peon");
         monde.peon.pos.afficher();
@@ -203,7 +238,7 @@ public class TestWoE {
         illustration que deux personnages ne sont pas sur la meme case
         */
     
-        monde.creeMondeAlea();
+       /* monde.creeMondeAlea(10);
         for (Personnage p: monde.personnages) {
             p.pos.afficher();
         }
@@ -214,7 +249,19 @@ public class TestWoE {
             monde.marquerPosition(personnage);
         
         }
-        monde.afficheWorld();
-    
-}
-}
+        monde.afficheWorld();*/
+        // test pour le constructeur de recopie après correction 
+        /* Point2D position1 = new Point2D(5, 10);
+        Archer archer1 = new Archer("Robin", 100, 20, 15, 10, 8, 30, position1, 20);
+        System.out.println("position de archer1");
+        archer1.pos.afficher();
+        Archer archer2 = new Archer(archer1);
+        System.out.println("position archer2");
+        archer2.pos.afficher();
+        System.out.println("position deplacée de archer1");
+        archer1.deplace();
+        archer1.pos.afficher();
+        //position deplacée aléatoirement de GuillaumeT
+        System.out.println("position de archer2");
+        archer2.pos.afficher();*/
+}       
