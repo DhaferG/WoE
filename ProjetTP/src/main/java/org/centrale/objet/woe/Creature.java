@@ -9,7 +9,7 @@ package org.centrale.objet.woe;
  * @author nourkouki
  * @author dghanmi
  */
-public class Creature {
+public class Creature extends ElementDeJeu implements Deplacable{
     //Attributs de la classe
     /**
      * Points de Vie du monstre
@@ -39,7 +39,7 @@ public class Creature {
     /**
      * position du monstre
      */
-    public Point2D pos;
+    //public Point2D pos;
 
     // constructeurs
     /**
@@ -52,12 +52,12 @@ public class Creature {
      * @param p: position du monstre 
      */
     public Creature(int pV, int dA, int pPar, int paAtt, int paPar, Point2D p){
-        ptVie= pV;
-        degAtt = dA;
-        ptPar = pPar;
-        pageAtt = paAtt;
-        pagePar = paPar;
-        pos = p;
+        super(p);
+        this.ptVie= pV;
+        this.degAtt = dA;
+        this.ptPar = pPar;
+        this.pageAtt = paAtt;
+        this.pagePar = paPar;
     }
     /**
      * Constructeur de recopie de la classe creature
@@ -65,12 +65,12 @@ public class Creature {
      */
     
     public Creature(Creature c){
+        super();
         this.ptVie=c.ptVie;
         this.degAtt=c.degAtt;
         this.ptPar=c.ptPar;
         this.pageAtt=c.pageAtt;
         this.pagePar=c.pagePar;
-        this.pos= new Point2D(c.pos);
     }
     
     /**
@@ -78,7 +78,10 @@ public class Creature {
      */
     
     public Creature(){
-        this.pos= new Point2D();
+        super();
+    }
+    public void deplace(){
+
     }
 
     

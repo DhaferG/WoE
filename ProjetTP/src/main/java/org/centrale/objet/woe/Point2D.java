@@ -58,7 +58,7 @@ public class Point2D {
 
     // Méthode pour afficher les coordonnées du point
     public void afficher() {
-        System.out.println("[" + x + ", " + y + "]");
+        System.out.println("[" + this.x + ", " + this.y + "]");
     }
     
     // set position

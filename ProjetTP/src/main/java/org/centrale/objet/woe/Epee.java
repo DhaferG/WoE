@@ -5,7 +5,7 @@ package org.centrale.objet.woe;
  * @author nourkouki
  * @author dghanmi
  */
-public class Epee extends Objet{
+public class Epee extends Objet implements Utilisable{
     /**
      * Attribut de la class
      * degAtt: pts de Vie que la potion donne
@@ -21,4 +21,12 @@ public class Epee extends Objet{
         super(pos, pts);
         this.degAtt = degAtt;
     }
+    public void use(Joueur j){
+        Personnage p = j.getPersonnage();
+        p.degAtt+=this.degAtt;
+    }
+    public void AddToInventory(Joueur j){
+        // TODO: Methode Joueur ManageInventory to add objects
+    }
+    public void SeeEffect(){}
 }

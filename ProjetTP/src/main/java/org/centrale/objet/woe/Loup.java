@@ -5,7 +5,7 @@ package org.centrale.objet.woe;
  * @author nourkouki
  * @author dghanmi
  */
-public class Loup extends Monstre {
+public class Loup extends Monstre implements Combattant {
     // constructeurs
     /**
      * Un constructeur de la classe Monstre avec 6 parametres

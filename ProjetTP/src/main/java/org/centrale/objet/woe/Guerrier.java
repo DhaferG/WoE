@@ -8,7 +8,7 @@ import java.util.Random;
  * @author dghanmi
  */
 
-public class Guerrier extends Personnage {
+public class Guerrier extends Personnage implements Combattant {
     // Constructeurs
     /**
      * Un constructeur de la classe Guerrier avec 8 parametres

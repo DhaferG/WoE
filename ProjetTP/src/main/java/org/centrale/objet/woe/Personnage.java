@@ -12,7 +12,7 @@ import java.util.Random;
  * @author dghanmi
  */
 
-public class Personnage extends Creature {
+public class Personnage extends Creature{
     
     //Attributs de la classe
     
@@ -210,15 +210,14 @@ public class Personnage extends Creature {
         int deltaY = rand.nextInt(3) - 1;
 
         // Mettre à jour la position
-        pos.setX(pos.getX() + deltaX);
-        pos.setY(pos.getY() + deltaY);
+        this.pos.setX(this.pos.getX() + deltaX);
+        this.pos.setY(this.pos.getY() + deltaY);
     }
 
     // Methode affiche
     /**
      * methode affiche permet d'afficher les caractéristique d'un personnage
      */
-    
     public void affiche() {
     System.out.println("Nom : " + nom);
     System.out.println("Points de vie : " + ptVie);
@@ -228,7 +227,13 @@ public class Personnage extends Creature {
     System.out.println("Pourcentage de parade : " + pagePar);
     System.out.println("Distance d'attaque maximale : " + distAttMax);
     System.out.print("Position : ");
-    pos.afficher();
+    if (this.pos !=null){
+        this.pos.afficher();
+    }
+    else{
+        System.out.println('F');
+    }
+    
     }
     
     

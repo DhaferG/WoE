@@ -5,13 +5,11 @@ package org.centrale.objet.woe;
  * @author nourkouki
  * @author dghanmi
  */
-public class Objet {
+public class Objet extends ElementDeJeu{
     // Attributs de la classe
      /** 
       * position de l'objet
       */
-   
-    public Point2D pos;
     /**
      * Points expérience gagnés grâce à l'objet
      */
@@ -23,7 +21,7 @@ public class Objet {
      * @param pts: Points expérience gagnés grâce à l'objet 
      */
     public Objet (Point2D pos,int pts) {
-        this.pos=pos;
+        super(pos);
         this.XP=pts;
     }
 }

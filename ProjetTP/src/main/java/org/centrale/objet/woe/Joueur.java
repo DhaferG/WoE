@@ -4,6 +4,7 @@
  */
 package org.centrale.objet.woe;
 
+import java.util.HashMap;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -16,6 +17,7 @@ public class Joueur {
     // attributs
     private Personnage p;
     private World w;
+    private Inventaire inventaire;
     
     //constructeurs
     public Joueur(World w) {
@@ -42,7 +44,6 @@ public class Joueur {
 
         System.out.println("Donnez un nom à votre personnage :");
         String nom = scanner.nextLine();
-        
         // Génération de la position aléatoire en fonction de taille_monde
         int tailleMonde = w.getTailleMonde();
         Point2D position = new Point2D(rand.nextInt(tailleMonde), rand.nextInt(tailleMonde)); // Position aléatoire dans un monde de 50x50
@@ -52,7 +53,6 @@ public class Joueur {
         int paradeAttaque = rand.nextInt(50) + 10; // Parade à l'attaque
         int pointsVie = rand.nextInt(100) + 100; // Entre 100 et 200 PV
         int distAttMax = rand.nextInt(20) + 5; // Distance d'attaque maximale
-
 
         if (type.equalsIgnoreCase("Guerrier")) {
             int degAtt = rand.nextInt(101) + 100; // Entre 100 et 200 de dégâts
@@ -70,15 +70,13 @@ public class Joueur {
      * permet à l'utilsateur de choisir soit se déplacer soit combattre
      * @param c : créature à combattre
      */
-    
+
     public void choixDuJeu(Creature c){
         Scanner scanner = new Scanner(System.in);
         int choix=0;
         while (choix!=1 && choix!=2) {
             System.out.println("Voulez-vous (1) vous déplacer ou (2) combattre ?");
             choix = scanner.nextInt();
-        
-        
             if (choix == 1) {
                 p.deplace(); // Appelle une méthode de déplacement
             } else if (choix == 2) {
@@ -92,7 +90,7 @@ public class Joueur {
                 System.out.println("choix invalide, veuillez choisir de nouveau");
             
             }
-    }
+        }
     }
     
             
