@@ -19,12 +19,14 @@ public class TestWoE {
         
         // Création du monde
         World world = new World();
-        System.out.println("cratures generées:");
+        // generation des creatures
+        System.out.println("creatures generées:");
         for (Creature creature : world.creatures) {
             System.out.println(creature.getClass().getSimpleName());
             System.out.println("--Position:");
             creature.pos.afficher();
         }
+        // generation des objets
         System.out.println("objets générés:");
         for (Objet objet: world.objets) {
             System.out.println(objet.getClass().getSimpleName());
@@ -36,10 +38,10 @@ public class TestWoE {
         System.out.println("Total d'objets générés: " + world.objets.size());
             
         
-
+        /*
         // Création du joueur avec la taille du monde
         Joueur joueurHumain = new Joueur(world);
-        Creature c = new Monstre(); // Créature ennemie
+        Creature c = new Monstre() {}; // Créature ennemie
 
         // Récupération du personnage choisi
         Personnage perso = joueurHumain.getPersonnage();
@@ -50,7 +52,7 @@ public class TestWoE {
             System.out.println("Tour " + (i+1));
             joueurHumain.choixDuJeu(c); // Chaque tour, le joueur choisit entre se déplacer ou combattre
         }
-    }
+    } */
         
        /* World monde= new World();
         int[] n = {100,1000,10000,100000,1000000};
@@ -264,4 +266,4 @@ public class TestWoE {
         //position deplacée aléatoirement de GuillaumeT
         System.out.println("position de archer2");
         archer2.pos.afficher();*/
-}       
+} }      

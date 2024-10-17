@@ -4,10 +4,16 @@
  */
 package org.centrale.objet.woe;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Random;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  * La classe World permet de creer un monde
  * @author nourkouki
@@ -279,6 +285,65 @@ public class World {
         System.out.println(); // Nouvelle ligne après chaque ligne de la matrice
     }
         
+    }
+    
+    /**
+     * Save world to database
+     *
+     * @param connection
+     * @param gameName
+     * @param saveName
+     * @param ID_sauvegarde
+     */
+    public void saveToDatabase(Connection connection, String gameName, String saveName, int ID_sauvegarde) {
+        if (connection != null) {
+            try {
+                int i = 0;
+                // Save world for Player ID
+                for (Creature e : creatures) {
+                    i++;
+                    e.saveToDatabase(connection, ID_sauvegarde, i);
+                }
+
+                String Query1 = "insert into inventaire(nom_monde)values('" + gameName + "') ";
+                PreparedStatement stm1 = connection.prepareStatement(Query1);
+                stm1.executeUpdate();
+                String Query2 = "select max(id_inventaire) as max_id_inv from inventaire ";
+                PreparedStatement stm2 = connection.prepareStatement(Query2);
+                ResultSet rs2 = stm2.executeQuery();
+                rs2.next();
+
+                String Query = "insert into contient_inventaire(id_inventaire,id_sauvegarde)values(" + (rs2.getInt("max_id_inv")) + "," + ID_sauvegarde + ") ";
+                PreparedStatement stm = connection.prepareStatement(Query);
+                stm.executeUpdate();
+                int j = 0;
+
+                for (Objet ob : objets) {
+                    j++;
+                    ob.saveToDatabase(connection, ID_sauvegarde, (rs2.getInt("max_id_inv")), j);
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(DatabaseTools.class.getName()).log(Level.SEVERE, null, ex);
+
+            }
+        }
+    }
+
+    /**
+     * Get world from database
+     *
+     * @param connection
+     * @param gameName
+     * @param saveName
+     */
+    public void getFromDatabase(Connection connection, String gameName, String saveName) {
+        if (connection != null) {
+            // Remove old data
+
+            // Get Player ID
+            
+            // get world for Player ID
+        }
     }
 
 }

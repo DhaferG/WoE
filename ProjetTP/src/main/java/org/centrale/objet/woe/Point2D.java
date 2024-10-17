@@ -11,8 +11,8 @@ package org.centrale.objet.woe;
  */
 public class Point2D {
     // Attributs privés
-    private int x;
-    private int y;
+    int x;
+    int y;
 
     // Constructeur sans paramètres (initialise les coordonnées à (0, 0))
     public Point2D() {

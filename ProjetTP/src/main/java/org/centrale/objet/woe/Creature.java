@@ -4,12 +4,14 @@
  */
 package org.centrale.objet.woe;
 
+import java.sql.Connection;
+
 /**
  * la classe Creature permet de gérer les créatures
  * @author nourkouki
  * @author dghanmi
  */
-public class Creature extends ElementDeJeu implements Deplacable{
+public abstract class Creature extends ElementDeJeu implements Deplacable{
     //Attributs de la classe
     /**
      * Points de Vie du monstre
@@ -37,9 +39,9 @@ public class Creature extends ElementDeJeu implements Deplacable{
     public int pagePar;
     
     /**
-     * position du monstre
+     * position
      */
-    //public Point2D pos;
+    public Point2D pos;
 
     // constructeurs
     /**
@@ -83,6 +85,9 @@ public class Creature extends ElementDeJeu implements Deplacable{
     public void deplace(){
 
     }
+    
+    public abstract void saveToDatabase(Connection connection,int ID_sauvegarde,int i);
+    public abstract void getFromDatabase(Connection connection, Integer id,String nom_creature);
 
     
 }

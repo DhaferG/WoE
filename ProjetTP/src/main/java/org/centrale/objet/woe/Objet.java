@@ -1,11 +1,13 @@
 package org.centrale.objet.woe;
 
+import java.sql.Connection;
+
 /**
  * Classe Objet gérant les objets
  * @author nourkouki
  * @author dghanmi
  */
-public class Objet extends ElementDeJeu{
+public abstract class Objet extends ElementDeJeu{
     // Attributs de la classe
      /** 
       * position de l'objet
@@ -24,4 +26,8 @@ public class Objet extends ElementDeJeu{
         super(pos);
         this.XP=pts;
     }
+    
+    public abstract void saveToDatabase(Connection connection,int ID_sauvegarde,int id_inventaire,int i);
+    public abstract void getFromDatabase(Connection connection, Integer id,int id_inventaire,String nom_objet);
+    
 }

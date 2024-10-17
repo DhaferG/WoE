@@ -4,7 +4,13 @@
  */
 package org.centrale.objet.woe;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * la classe Archer sous classe de Personnage définit le personnage Archer
@@ -13,7 +19,7 @@ import java.util.Random;
  */
 
 
-public class Archer extends Personnage {
+public class Archer extends Personnage implements Combattant {
     //Attributs
     /**
      * le nombre de fleches de l'Archer
@@ -87,6 +93,55 @@ public class Archer extends Personnage {
             System.out.println("Echec");
         }
 
+    }
+
+    /**
+     *
+     * @param connection
+     * @param ID_sauvegarde
+     * @param i
+     */
+    @Override
+    public void saveToDatabase(Connection connection, int ID_sauvegarde, int i) {
+        try {
+            String Query = "insert into humanoide(nom_hum, id_hum, id_creature, type_hum) values('" + this.nom + "', h- '" + i + "', c- '" + i + "', 'Archer')";
+            PreparedStatement stm = connection.prepareStatement(Query);
+            stm.executeUpdate();
+            String Query1 = "insert into creature(id_creature, pos_x, pos_y) values('c-" + i + "', " + this.pos.x + ", " + this.pos.y + ")";
+            PreparedStatement stm1 = connection.prepareStatement(Query1);
+            stm1.executeUpdate();
+            System.out.println("Archer nom:" + this.nom + i);
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseTools.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
+
+    }
+
+    /**
+     *
+     * @param connection
+     * @param id
+     * @param nom_humanoide
+     */
+    @Override
+    public void getFromDatabase(Connection connection, Integer id, String nom_humanoide) {
+        try {
+            String Query = "select h.nom_hum, h.id_hum, c.pos_x, c.pos_y from humanoide h inner join creature c using(id_creature) inner join est_dans_une_sauv s using(id_creature) where s.id_sauvegarde= " + id + "and h.type_hum='Archer'and h.nom_hum='" + nom_humanoide + "'";
+            PreparedStatement stm = connection.prepareStatement(Query);
+            ResultSet rs = stm.executeQuery();
+            rs.next();
+            while (rs.next()) {
+                this.nom = rs.getString("h.nom_hum");
+                this.pos.x = rs.getInt("c.pos_x");
+                this.pos.y = rs.getInt("c.pos_y");
+                System.out.println("Archer: nom: " + this.nom + " x: " + this.pos.x + " y: " + this.pos.y);
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseTools.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
     }
 }
 
