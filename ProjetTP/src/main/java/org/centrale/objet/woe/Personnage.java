@@ -12,7 +12,7 @@ import java.util.Random;
  * @author dghanmi
  */
 
-public class Personnage extends Creature{
+public abstract class Personnage extends Creature{
     
     //Attributs de la classe
     

@@ -20,6 +20,8 @@ public class Joueur {
     private ArrayList<Utilisable> Buffs;
     private int Maxhealth;
     private int XP;
+    private String username;
+    private String password;
     
     //constructeurs
     public Joueur(World w) {
@@ -29,6 +31,7 @@ public class Joueur {
         this.Buffs = new ArrayList<>(6);
         this.XP=0;
         this.Maxhealth=this.p.getPtVie();
+        this.username = username;
     
     }
     //getters:
@@ -51,7 +54,7 @@ public class Joueur {
         String type = scanner.nextLine();
 
         System.out.println("Donnez un nom à votre personnage :");
-        String nom = scanner.nextLine();
+        this.username = scanner.nextLine();
         // Génération de la position aléatoire en fonction de taille_monde
         int tailleMonde = w.getTailleMonde();
         Point2D position = new Point2D(rand.nextInt(tailleMonde), rand.nextInt(tailleMonde)); // Position aléatoire dans un monde de 50x50
@@ -65,12 +68,12 @@ public class Joueur {
         if (type.equalsIgnoreCase("Guerrier")) {
             int degAtt = rand.nextInt(30) + 20; // Entre 100 et 200 de dégâts
             scanner.close();
-            return new Guerrier(nom, pointsVie, degAtt, parade, paradeAttaque, parade, distAttMax, position);
+            return new Guerrier(pointsVie, degAtt, parade, paradeAttaque, parade, distAttMax, position);
         } else if (type.equalsIgnoreCase("Archer")) {
             int nbFleches = rand.nextInt(20) + 10;
             int degAtt = rand.nextInt(50) + 50; // Entre 50 et 99 de dégâts car deg attaque de l'archer est toujours inférieur à celui du guerrier
             scanner.close();
-            return new Archer(nom, pointsVie, degAtt, parade, paradeAttaque, parade, distAttMax, position, nbFleches);
+            return new Archer(pointsVie, degAtt, parade, paradeAttaque, parade, distAttMax, position, nbFleches);
         } else {
             System.out.println("Type de personnage non jouable. Choisissez un Guerrier ou un Archer.");
             scanner.close();
@@ -86,6 +89,7 @@ public class Joueur {
         int y = this.p.pos.getY();
         if (this.w.inposition(x, y) instanceof Objet){
             if (this.inventaire.addObjet((Objet) this.w.inposition(x, y))){
+            this.XP= this.XP + ((Objet)this.w.inposition(x, y)).XP;
             this.w.dropElement(x, y);
             }
         }
@@ -113,7 +117,10 @@ public class Joueur {
 
     }
     public void update(){
-
+        for (int i=0;i<6;i++){
+            this.Buffs.get(i).SetBuffDuration(this.Buffs.get(i).BuffDuration()-1);
+        }
+        this.Debuff();
     }
     public void AddBuff(Utilisable u){
         this.Buffs.add(u);
@@ -183,29 +190,6 @@ public class Joueur {
         System.out.println("Creature not found");
     }
 }
-
-
-    // public void choixDuJeu(Creature c){
-    //     Scanner scanner = new Scanner(System.in);
-    //     int choix=0;
-    //     while (choix!=1 && choix!=2) {
-    //         System.out.println("Voulez-vous (1) vous déplacer ou (2) combattre ?");
-    //         choix = scanner.nextInt();
-    //         if (choix == 1) {
-    //             p.deplace(); // Appelle une méthode de déplacement
-    //         } else if (choix == 2) {
-    //             if (p instanceof Archer){
-    //                 ((Archer) p).combattre(c);
-                
-    //             } else if (p instanceof Guerrier){
-    //             ((Guerrier) p).combattre(c);
-    //         }
-    //         } else {
-    //             System.out.println("choix invalide, veuillez choisir de nouveau");
-            
-    //         }
-    //     }
-    // }
     public void deplacer(int dx, int dy){
         int x = this.p.pos.getX();
         int y = this.p.pos.getY();

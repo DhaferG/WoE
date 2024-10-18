@@ -13,7 +13,7 @@ import java.util.Random;
  */
 
 
-public class Archer extends Personnage {
+public class Archer extends Personnage implements Combattant{
     //Attributs
     /**
      * le nombre de fleches de l'Archer
@@ -23,7 +23,6 @@ public class Archer extends Personnage {
     // Constructeurs
     /**
      * 
-     * @param n: du personnage
      * @param pV: les points de vie du personnage
      * @param dA: degats d'attaque
      * @param pPar: points de parade
@@ -33,9 +32,10 @@ public class Archer extends Personnage {
      * @param p: position du personnage 
      * @param nbFleches : nombre de fleches
      */
-    public Archer(String n, int pV, int dA, int pPar, int paAtt, int paPar, int dMax, Point2D p, int nbFleches) {
-        super(pV, dA, pPar, paAtt, paPar, p, n, dMax);
+    public Archer( int pV, int dA, int pPar, int paAtt, int paPar, int dMax, Point2D p, int nbFleches) {
+        super(pV, dA, pPar, paAtt, paPar, p, "", dMax);
         this.nbFleches = nbFleches;
+        this.setNom(this.GenRanArcherName());
     }
 
     public Archer(Archer a) {
@@ -88,5 +88,25 @@ public class Archer extends Personnage {
         }
 
     }
+
+    public String GenRanArcherName() {
+        String[] archerNames = {
+            "Legolas",
+            "Robin Hood",
+            "Artemis",
+            "Green Arrow",
+            "Hawkeye",
+            "Ullr",
+            "Katniss",
+            "Apollo",
+            "Hou Yi",
+            "Atalanta"
+        };
+        Random random = new Random();
+        int index = random.nextInt(archerNames.length);
+        return archerNames[index];
+        
+    }
 }
+
 

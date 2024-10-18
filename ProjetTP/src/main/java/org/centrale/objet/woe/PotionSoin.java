@@ -18,7 +18,7 @@ public class PotionSoin extends Objet{
      * @param pos: position de la potion
      * @param pts: points à gagner en trouvant la potion
      */
-        super(pos, 10,"");
+        super(pos, 10,"Potion");
         this.health = health;
     }
     

@@ -1,5 +1,7 @@
 package org.centrale.objet.woe;
 
+import java.util.Random;
+
 /**
  * sous classe de Monstre gérant les Loups
  * @author nourkouki
@@ -41,5 +43,25 @@ public class Loup extends Monstre implements Combattant {
      * @param c: Creature à combattre
      */
     public void combattre(Creature c){
+                double d = this.pos.distance(c.pos);
+        boolean attaque = true;
+        Random x = new Random();
+        if (d <= 1) {
+            int y = x.nextInt(100);
+            System.out.println("Rand du tirage aléatoire" + y);
+            if (y > this.pageAtt) {
+                attaque = false;
+            }
+            System.out.println("attaque " + attaque);
+            if (attaque) {
+                int z = x.nextInt(100);
+                if (z > c.pagePar) {
+                    c.ptVie -= this.degAtt;
+                } else {
+                    c.ptVie = c.ptVie -this.degAtt + c.ptPar;
+                }
+            }
+        }
     }
 }
+

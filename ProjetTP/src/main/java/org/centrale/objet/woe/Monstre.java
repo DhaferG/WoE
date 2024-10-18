@@ -4,14 +4,12 @@
  */
 package org.centrale.objet.woe;
 
-import java.util.Random;
-
 /**
  * Classe monstre sous classe de Creature permet d'attribuer des caractéristiques à un monstre
  * @author nourkouki
  * @author dghanmi
  */
-public class Monstre extends Creature {
+public abstract class Monstre extends Creature {
     
     // constructeurs
     /**

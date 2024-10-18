@@ -30,7 +30,8 @@ public class World {
     /*
      * Array List and linked list for performance comparison
      */
-    public ArrayList<Creature> creatures ;
+    private HashMap<Point2D,Combattant> EnemyCreats;
+    private HashMap<Point2D,NuageToxique> Nuages;
     public HashMap<Point2D,ElementDeJeu> elems;
     /**
      * Matrice pour représenter l'espace de jeu
@@ -60,54 +61,66 @@ public class World {
         for (int i=0;i<m;i++){
             int d = rand.nextInt(100);
             if (d<10){
-                Guerrier g = new Guerrier() ;
-                g.pos.setPosition(positions[i], positions[i+1]);
-                g.ptVie=rand.nextInt(100)+200; //TODO: Change the constructor to add default values for each character
-                g.setNom("Guerrier");
-                a.put(new Point2D(positions[i],positions[i+1]), g);
+                Point2D p = new Point2D(positions[i], positions[i+1]);
+                Guerrier g = new Guerrier(300,10,15,50,20,1,p);
+                a.put(p, g);
+                this.EnemyCreats.put(p, g);
                 espaceJeu[positions[i]][positions[i+1]]=g;
             }
-            else if (d<25){
-                Archer arch =new Archer();
-                arch.pos.setPosition(positions[i], positions[i+1]);
-                arch.ptVie=rand.nextInt(80)+100;
-                arch.setNom("Archer");
-                a.put(new Point2D(positions[i],positions[i+1]),arch);
+            else if (d<22){
+                Point2D p= new Point2D(positions[i], positions[i+1]);
+                Archer arch =new Archer(200,15,10,60,5,4,p,20);
+                a.put(p,arch);
+                this.EnemyCreats.put(p,arch);
                 espaceJeu[positions[i]][positions[i+1]]=arch;
             }
-            else if (d<35){
-                Paysan p = new Paysan();
-                p.pos.setPosition(positions[i], positions[i+1]);
-                p.setNom("Hill Billy");
-                a.put(new Point2D(positions[i],positions[i+1]),p);
+            else if (d<30){
+                Point2D s = new Point2D(positions[i], positions[i+1]);
+                Paysan p = new Paysan("Villager",100,0,0,0,0,0,s);
+                a.put(s,p);
                 espaceJeu[positions[i]][positions[i+1]]=p;
             }
-            else if (d<48){
-                Loup l = new Loup();
-                l.pos.setPosition(positions[i], positions[i+1]);
-                l.setNom("Wolfie");
-                a.put(new Point2D(positions[i],positions[i+1]),l);
+            else if (d<45){
+                Point2D p = new Point2D (positions[i], positions[i+1]);
+                Loup l = new Loup(250,20,0,40,0,p,"Wolf");
+                a.put(p,l);
+                this.EnemyCreats.put(p,l);
                 espaceJeu[positions[i]][positions[i+1]]=l;
             }
-            else if (d<65){
-                Lapin l = new Lapin();
-                l.pos.setPosition(positions[i], positions[i+1]);
+            else if (d<60){
+                Point2D p = new Point2D(positions[i], positions[i+1]);
+                Lapin l = new Lapin(50,0,0,0,0,p,"Rabbit");
                 l.setNom("Bugs");
                 a.put(new Point2D(positions[i],positions[i+1]),l);
                 espaceJeu[positions[i]][positions[i+1]]=l;
             }
-            else if (d<85){
+            else if (d<80){
                 Point2D pos = new Point2D(positions[i], positions[i+1]);
                 int h = rand.nextInt(50)+50;
                 PotionSoin p = new PotionSoin(pos , h);
                 a.put(pos,p);
                 espaceJeu[positions[i]][positions[i+1]]=p;
             }
+            else if (d<90){
+                Point2D pos = new Point2D(positions[i], positions[i+1]);
+                int h = rand.nextInt(60)+12;
+                Epee p = new Epee(pos , h, 6);
+                a.put(pos,p);
+                espaceJeu[positions[i]][positions[i+1]]=p;
+            }
+            else if (d<95){
+                Point2D pos = new Point2D(positions[i], positions[i+1]);
+                int h = rand.nextInt(60)+12;
+                Nourriture p = new Nourriture(pos,h,6);
+                a.put(pos,p);
+                espaceJeu[positions[i]][positions[i+1]]=p;
+            }
             else{
                 Point2D pos = new Point2D(positions[i], positions[i+1]);
                 int h = rand.nextInt(60)+12;
-                Epee p = new Epee(pos,30 , h);
+                NuageToxique p = new NuageToxique(pos,h , 3);
                 a.put(pos,p);
+                this.Nuages.put(pos,p);
                 espaceJeu[positions[i]][positions[i+1]]=p;
             }
         }
@@ -122,6 +135,8 @@ public class World {
     public World() {
         this.espaceJeu = new ElementDeJeu[TAILLE_MONDE][TAILLE_MONDE];
         this.elems = new HashMap<>();
+        this.Nuages = new HashMap<>();
+        this.EnemyCreats = new HashMap<>();
     }
     /**
      * méthode permet d'initialiser l'espace de jeu avec des cases vides
@@ -145,8 +160,9 @@ public class World {
     public void dropElement(int x, int y){
         this.espaceJeu[x][y]=null;
         this.elems.remove(new Point2D(x,y));
+        this.EnemyCreats.remove(new Point2D(x,y));
     }
-    public void update(){
+    public void update(Joueur player){
         Random r = new Random();
         for (ElementDeJeu c:this.elems.values()){
             if (c instanceof Deplacable){
@@ -159,12 +175,34 @@ public class World {
             }
         }
         this.elems.clear();
+        this.EnemyCreats.clear();
+        this.Nuages.clear();
         for (int i=0;i<TAILLE_MONDE;i++){
             for (int j=0; j<TAILLE_MONDE;j++){
             if (!(this.espaceJeu[i][j]==null)){
                 this.elems.put(new Point2D(i,j), this.inposition(i, j));
+                if (this.espaceJeu[i][j] instanceof Combattant) {
+                    this.EnemyCreats.put(new Point2D(i,j),(Combattant) this.inposition(i, j));
+                }
+                if (this.espaceJeu[i][j] instanceof NuageToxique) {
+                    this.Nuages.put(new Point2D(i,j),(NuageToxique) this.inposition(i, j));
+                }
             }
             }
+        }
+        for (Combattant c: this.EnemyCreats.values()){
+            if (c instanceof Loup){
+                ((Loup)c).combattre((Creature)player.getPersonnage());
+            }
+            if (c instanceof Guerrier){
+                ((Guerrier)c).combattre((Creature)player.getPersonnage());
+            }
+            if (c instanceof Archer){
+                ((Archer)c).combattre((Creature)player.getPersonnage());
+            }
+        }
+        for (NuageToxique n:this.Nuages.values()){
+            n.Debuff(player);
         }
 
     }

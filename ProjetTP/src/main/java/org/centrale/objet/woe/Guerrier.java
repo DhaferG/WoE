@@ -1,5 +1,6 @@
 package org.centrale.objet.woe;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -22,8 +23,9 @@ public class Guerrier extends Personnage implements Combattant {
      * @param p: position du personnage 
      * 
     */
-    public Guerrier(String n, int pV, int dA, int pPar, int paAtt, int paPar, int dMax, Point2D p) {
-        super(pV, dA, pPar, paAtt, paPar, p, n, dMax);
+    public Guerrier(int pV, int dA, int pPar, int paAtt, int paPar, int dMax, Point2D p) {
+        super(pV, dA, pPar, paAtt, paPar, p, "", dMax);
+        this.setNom(this.GenRanName());
     }
      /**
      * Un constructeur de recopie de la classe Guerrier
@@ -48,7 +50,7 @@ public class Guerrier extends Personnage implements Combattant {
         double d = this.pos.distance(c.pos);
         boolean attaque = true;
         Random x = new Random();
-        if (d == 1) {
+        if (d <= this.distAttMax) {
             int y = x.nextInt(100);
             System.out.println("Rand du tirage aléatoire" + y);
             if (y > this.pageAtt) {
@@ -65,4 +67,20 @@ public class Guerrier extends Personnage implements Combattant {
             }
         }
     }
+    public String GenRanName() {
+        // List of popular warrior names from mythology and fiction
+        String[] names = {
+            "Achilles", "Hercules",  "Beowulf","Arthur",
+            "Igris","Thor","Leonidas","Kratos", "Ares", "Conan"      
+        };
+
+        // Create an instance of Random
+        Random random = new Random();
+
+        // Generate a random index to pick a name from the array
+        int index = random.nextInt(names.length);
+
+        // Return the randomly selected name
+        return names[index];
     }
+}

@@ -9,7 +9,7 @@ package org.centrale.objet.woe;
  * @author nourkouki
  * @author dghanmi
  */
-public class Creature extends ElementDeJeu implements Deplacable{
+public abstract class Creature extends ElementDeJeu implements Deplacable{
     //Attributs de la classe
     /**
      * Points de Vie du monstre
