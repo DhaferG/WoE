@@ -1,7 +1,8 @@
 package org.centrale.objet.woe;
 
 public abstract class ElementDeJeu {
-    Point2D pos;
+    public Point2D pos;
+    public String nom;
     /*Constructeur de la classe élement de jeu
      * Attributs:
      * pos: Point2D
@@ -16,6 +17,7 @@ public abstract class ElementDeJeu {
 
     public ElementDeJeu(ElementDeJeu e){
         this.pos=new Point2D(e.pos);
+        this.nom=e.nom;
     }
 
     public Point2D getPos() {
@@ -24,5 +26,11 @@ public abstract class ElementDeJeu {
 
     public void setPos(Point2D pos) {
         this.pos = pos;
+    }
+    public String getNom() {
+        return this.nom;
+    }
+    public void setNom(String nom) {
+        this.nom=nom;
     }
 }

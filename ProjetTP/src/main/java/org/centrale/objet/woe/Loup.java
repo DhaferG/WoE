@@ -15,10 +15,11 @@ public class Loup extends Monstre implements Combattant {
      * @param paAtt: Pourcentage d'attaque
      * @param paPar: pourcentage de parade
      * @param p: position du monstre 
+     * @param nom: nom du loup
      * 
     */
-    public Loup(int pV, int dA, int pPar, int paAtt, int paPar, Point2D p){
-        super(pV, dA, pPar, paAtt, paPar, p);
+    public Loup(int pV, int dA, int pPar, int paAtt, int paPar, Point2D p,String nom){
+        super(pV, dA, pPar, paAtt, paPar, p, nom);
     }
      /**
      * Constructeur de recopie de la classe Loup

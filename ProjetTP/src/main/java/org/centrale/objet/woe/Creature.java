@@ -50,9 +50,11 @@ public class Creature extends ElementDeJeu implements Deplacable{
      * @param paAtt: Pourcentage d'attaque
      * @param paPar: pourcentage de parade
      * @param p: position du monstre 
+     * @param nom: nom de la creature
      */
-    public Creature(int pV, int dA, int pPar, int paAtt, int paPar, Point2D p){
+    public Creature(int pV, int dA, int pPar, int paAtt, int paPar, Point2D p, String nom){
         super(p);
+        this.setNom(nom);
         this.ptVie= pV;
         this.degAtt = dA;
         this.ptPar = pPar;
@@ -80,9 +82,17 @@ public class Creature extends ElementDeJeu implements Deplacable{
     public Creature(){
         super();
     }
-    public void deplace(){
-
-    }
-
-    
+    public void deplace(World w, int dx , int dy){
+        int x = this.pos.getX();
+        int y = this.pos.getY();
+        int h = w.getTailleMonde();
+        if ((x+dx<h) &&(x+dx>=0)&& (y+dy>=0)&&(y+dy<h)){
+            if (!(w.inposition(x+dx, y+dy) instanceof Creature)){
+                this.setPos(new Point2D(x+dx,y+dy));
+            }
+        }
+        else{
+            this.setPos(new Point2D(x,y));
+        }
+    }    
 }

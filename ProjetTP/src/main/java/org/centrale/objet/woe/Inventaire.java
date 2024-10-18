@@ -1,51 +1,62 @@
 package org.centrale.objet.woe;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 
 public class Inventaire {
-    private HashMap<Integer, Objet> Objets; 
-    private static final int MAX_ObjetS = 6; 
+    private ArrayList<Objet> objets;   
+    private static final int MAX_OBJETS = 6; 
 
     // Constructor
     public Inventaire() {
-        Objets = new HashMap<>();
-    }
-    public void addObjet(int slot, Objet Objet) {
-        if (Objets.size() < MAX_ObjetS) {
-            if (!Objets.containsKey(slot)) {
-                Objets.put(slot, Objet);
-            } else {
-                System.out.println("Slot " + slot + " is already occupied.");
-            }
-        } else {
-            System.out.println("Inventory is full. Cannot add more Objets.");
-        }
+        objets = new ArrayList<>(MAX_OBJETS); 
     }
 
-    // Remove an Objet from the inventory
+    // Add an objet to the inventory
+    public boolean addObjet(Objet objet) {
+        if (objets.size() < MAX_OBJETS) {
+            objets.add(objet); 
+            return true;
+        } else {
+            System.out.println("Inventory is full. Cannot add more objects.");
+            return false;
+        }
+        
+    }
+
+    // Remove an objet from the inventory at a specific slot
     public void removeObjet(int slot) {
-        if (Objets.containsKey(slot)) {
-            Objet removedObjet = Objets.remove(slot);
+        if (slot >= 0 && slot < objets.size()) {
+            Objet removedObjet = objets.remove(slot);
+            System.out.println(removedObjet.getNom() + " removed from slot " + slot);
         } else {
-            System.out.println("Slot " + slot + " is empty.");
+            System.out.println("Slot " + slot + " is empty or out of bounds.");
         }
     }
 
-    // Display all Objets in the inventory
-    public void displayInventory() {
-        if (Objets.isEmpty()) {
-            System.out.println("Inventory is empty.");
-        } else {
-            System.out.println("Player's Inventory:");
-            for (int slot : Objets.keySet()) {
-                System.out.print("Slot " + slot + ": ");
-                // TODO : Methode Affiche pour Objet
+    // Display all objects in the inventory
+    public String displayInventory() {
+        if (this.objets.isEmpty()) {
+            return "Inventory is empty.";
+        } 
+        else if (objets == null){
+            return "Empty";
+        }
+        else {
+            String s= "Player's Inventory:";
+            for (int i = 0; i < objets.size(); i++) {
+                s+= "Slot " + i + ": ";
+                s+=objets.get(i).affiche();
             }
+            return s;
         }
     }
 
-    // Get Objet from a specific slot
     public Objet getObjet(int slot) {
-        return Objets.get(slot);
+        if (slot >= 0 && slot < objets.size()) {
+            return objets.get(slot);
+        } else {
+            System.out.println("Slot " + slot + " is out of bounds.");
+            return null;
+        }
     }
 }

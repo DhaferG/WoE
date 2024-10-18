@@ -18,10 +18,16 @@ public class Objet extends ElementDeJeu{
     /**
      * Constructeur de la classe Objet
      * @param pos: position de l'objet
-     * @param pts: Points expérience gagnés grâce à l'objet 
+     * @param XP: Points expérience gagnés grâce à l'objet
+     * @param nom: nom de l'objet
      */
-    public Objet (Point2D pos,int pts) {
+    public Objet (Point2D pos,int XP, String nom) {
         super(pos);
-        this.XP=pts;
+        this.setNom(nom);
+        this.XP=XP;
+    }
+    public String affiche(){
+        System.out.println(nom);
+        return nom;
     }
 }

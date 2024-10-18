@@ -11,22 +11,31 @@ public class Epee extends Objet implements Utilisable{
      * degAtt: pts de Vie que la potion donne
      */
     private int degAtt;
+    private int dureeEffet;
    /**
     * Constructeur à partir de deux paramètres et la classe Objet
     * @param pos: position de l'objet
     * @param pts: Points expérience gagnés grâce à l'objet - Peut être ignoré pour le moment
     * @param degAtt: degats d'attaque
     */
-    public Epee(Point2D pos,int pts,int degAtt) {
-        super(pos, pts);
+    public Epee(Point2D pos,int degAtt,int dureeEffet) {
+        super(pos, 10,"");
         this.degAtt = degAtt;
+        this.dureeEffet = dureeEffet;
     }
     public void use(Joueur j){
         Personnage p = j.getPersonnage();
-        p.degAtt+=this.degAtt;
+        p.setDegAtt(p.getDegAtt()+this.degAtt);
     }
-    public void AddToInventory(Joueur j){
-        // TODO: Methode Joueur ManageInventory to add objects
+    public int BuffDuration(){
+        return this.dureeEffet;
     }
-    public void SeeEffect(){}
+    public void SetBuffDuration(int b){
+        this.dureeEffet=b;
+    }
+    public void DebuffAfterEnd(Joueur j){
+        Personnage p = j.getPersonnage();
+        p.setDegAtt(p.getDegAtt()-this.degAtt);
+    }
+    
 }

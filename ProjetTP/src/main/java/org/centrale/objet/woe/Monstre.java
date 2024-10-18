@@ -22,10 +22,11 @@ public class Monstre extends Creature {
      * @param paAtt: Pourcentage d'attaque
      * @param paPar: pourcentage de parade
      * @param p: position du monstre 
+     * @param nom: nom du monstre
      * 
     */
-    public Monstre(int pV, int dA, int pPar, int paAtt, int paPar, Point2D p) {
-        super(pV, dA, pPar, paAtt, paPar, p);
+    public Monstre(int pV, int dA, int pPar, int paAtt, int paPar, Point2D p,String nom) {
+        super(pV, dA, pPar, paAtt, paPar, p, nom);
     }
     
     /**
@@ -145,23 +146,6 @@ public class Monstre extends Creature {
 
     public void setPos(Point2D pos) {
         this.pos = pos;
-    }
-    
-    // methode deplace
-    /**
-     * methode deplace permet de deplacer aléatoirement un objet sur une case adjacente
-     * de la ou il se trouve
-     */
-    
-    public void deplace() {
-        Random rand = new Random();
-        // Déplacement aléatoire entre -1 et 1 sur les axes x et y
-        int deltaX = rand.nextInt(3) - 1; // Valeur aléatoire entre -1 et 1
-        int deltaY = rand.nextInt(3) - 1;
-
-        // Mettre à jour la position
-        pos.setX(pos.getX() + deltaX);
-        pos.setY(pos.getY() + deltaY);
     }
     
     // methode affiche

@@ -19,7 +19,6 @@ public class Personnage extends Creature{
     /**
      * le nom du personnage
      */
-    public String nom;
     /**
      * distance d'attaque maximale
      */
@@ -36,12 +35,11 @@ public class Personnage extends Creature{
      * @param paPar: pourcentage de parade
      * @param dMax: distance maximale d'attaque
      * @param p: position du personnage 
-     * 
+     * @param nom: nom du personnage
     */
     
-    public Personnage(int pV, int dA, int pPar, int paAtt, int paPar, Point2D p, String n, int dMax) {
-        super(pV, dA, pPar, paAtt, paPar, p);
-        this.nom = n;
+    public Personnage(int pV, int dA, int pPar, int paAtt, int paPar, Point2D p, String nom, int dMax) {
+        super(pV, dA, pPar, paAtt, paPar, p ,nom);
         this.distAttMax = dMax;
     }
 
