@@ -35,7 +35,6 @@ public class Loup extends Monstre implements Combattant {
      */
     public Loup(Loup l) {
         super(l);
-        this.pos= new Point2D(l.pos);
     }
 
     public Loup() {

@@ -16,8 +16,20 @@ public class TestWoE {
      * @param args
      */
     public static void main(String[] args){
+        DatabaseTools database = new DatabaseTools();
+        World monde = new World();
+        // Save world
+        database.connect();
+        //Integer playerId = database.getPlayerID("Saegusa", "Mayumi");
+        //database.saveWorld(playerId, "Partie1", "sauv1", monde);
+        //database.readWorld(playerId, "Partie1", "sauv1", monde);
+        //Point2D p = new Point2D(2,5);
+        // Créer un Archer avec la position initialisée
+        Loup l= new Loup();
+        l.pos.afficher();
+        //archer.saveToDatabase(database.connection, 1, 1);
         
-        // Création du monde
+    /*    // Création du monde
         World world = new World();
         // generation des creatures
         System.out.println("creatures generées:");
@@ -37,7 +49,7 @@ public class TestWoE {
         System.out.println("\nTotal de créatures générées: " + world.creatures.size());
         System.out.println("Total d'objets générés: " + world.objets.size());
             
-        
+       */ 
         /*
         // Création du joueur avec la taille du monde
         Joueur joueurHumain = new Joueur(world);
@@ -253,7 +265,7 @@ public class TestWoE {
         }
         monde.afficheWorld();*/
         // test pour le constructeur de recopie après correction 
-        /* Point2D position1 = new Point2D(5, 10);
+        /*Point2D position1 = new Point2D(5, 10);
         Archer archer1 = new Archer("Robin", 100, 20, 15, 10, 8, 30, position1, 20);
         System.out.println("position de archer1");
         archer1.pos.afficher();

@@ -21,7 +21,7 @@ public class DatabaseTools {
     private String login;
     private String password;
     private String url;
-    private Connection connection;
+    Connection connection;
 
     /**
      * Load infos
@@ -85,7 +85,6 @@ public class DatabaseTools {
     public Integer getPlayerID(String nomJoueur, String password) {
         Integer playerID = null;
         try {
-            this.connect();
             String query ="SELECT nom_code from joueur where  nom_joueur=? and mdp=?";
             PreparedStatement stmt = this.connection.prepareStatement(query);
             stmt.setString(1, nomJoueur);
@@ -104,11 +103,7 @@ public class DatabaseTools {
         catch (SQLException ex) {
             Logger.getLogger(DatabaseTools.class.getName()).log(Level.SEVERE, null, ex);
         }
-        finally{
-            disconnect();
-        }
         return playerID;
-        
     }
     
     /**
@@ -122,7 +117,6 @@ public class DatabaseTools {
         
     public void saveWorld(Integer idJoueur, String nomPartie, String nomSauvegarde, World monde) {
     try {
-        this.connect();
         String query_id = "SELECT MAX(id_monde) as max_id from monde";
         PreparedStatement stmtid = this.connection.prepareStatement(query_id);
         ResultSet max = stmtid.executeQuery();
@@ -187,9 +181,6 @@ public class DatabaseTools {
     catch (SQLException ex) {
         Logger.getLogger(DatabaseTools.class.getName()).log(Level.SEVERE, null, ex);
     }
-    finally {
-        disconnect();
-        }
     }
 
 
@@ -203,7 +194,6 @@ public class DatabaseTools {
      */
     public void readWorld(Integer idJoueur, String nomPartie, String nomSauvegarde, World monde) {
         try {
-            this.connect();
             String Query = String.format("SELECT a.*,s.nom from public.partie a\r\n" + //
                                 "JOIN public.sauvegarde s on a.id_sauvegarde = s.id_sauvegarde\r\n" + //
                                 "WHERE s.nom=? and a.nom_code=? and a.nom_partie =?" );
@@ -213,14 +203,11 @@ public class DatabaseTools {
             stmt.setString(3,nomPartie);
             ResultSet res = stmt.executeQuery();
             while (res.next()) {
-                System.out.println("Id_sauvegarde est"+res.getInt("id_sauvegarde"));
-                System.out.println("Id_partie est"+res.getInt("id_partie"));
+                System.out.println("Id_sauvegarde est "+res.getInt("id_sauvegarde"));
+                System.out.println("Id_partie est "+res.getInt("id_partie"));
             }
         } catch (SQLException ex) {
                 Logger.getLogger(DatabaseTools.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        finally{
-            disconnect();
         }
     }
 

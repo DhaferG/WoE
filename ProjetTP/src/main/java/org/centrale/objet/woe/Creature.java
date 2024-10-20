@@ -67,7 +67,7 @@ public abstract class Creature extends ElementDeJeu implements Deplacable{
      */
     
     public Creature(Creature c){
-        super();
+        super(c);
         this.ptVie=c.ptVie;
         this.degAtt=c.degAtt;
         this.ptPar=c.ptPar;

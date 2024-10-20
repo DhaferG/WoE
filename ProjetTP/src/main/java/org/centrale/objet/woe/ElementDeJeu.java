@@ -6,16 +6,17 @@ public abstract class ElementDeJeu {
      * Attributs:
      * pos: Point2D
      */
-    public ElementDeJeu(){
-        this.pos=new Point2D();
+    
+    public ElementDeJeu(Point2D pos){
+        this.pos= pos;
     }
-
-    public ElementDeJeu(Point2D p){
-        this.pos= new Point2D(p);
-    }
-
+    
     public ElementDeJeu(ElementDeJeu e){
         this.pos=new Point2D(e.pos);
+    }
+    
+    public ElementDeJeu(){
+        this.pos=new Point2D();
     }
 
     public Point2D getPos() {
