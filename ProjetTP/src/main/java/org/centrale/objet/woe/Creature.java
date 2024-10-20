@@ -41,7 +41,6 @@ public abstract class Creature extends ElementDeJeu implements Deplacable{
     /**
      * position
      */
-    public Point2D pos;
 
     // constructeurs
     /**
