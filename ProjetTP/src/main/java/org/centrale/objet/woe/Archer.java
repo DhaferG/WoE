@@ -171,5 +171,6 @@ public class Archer extends Personnage implements Combattant {
         }
     }
     
+    
 }
 
