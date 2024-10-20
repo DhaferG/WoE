@@ -1,6 +1,11 @@
 package org.centrale.objet.woe;
 
 import java.util.HashMap;
+/**
+ * la classe Inventaire gère l'inventaire du joueur humain
+ * @author nourkouki
+ * @author dghanmi
+ */
 
 public class Inventaire {
     private HashMap<Integer, Objet> Objets; 

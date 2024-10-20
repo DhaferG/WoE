@@ -49,7 +49,7 @@ public class PotionSoin extends Objet{
      * @param id_inventaire
      * @param i
      */
-    @Override
+
     public void saveToDatabase(Connection connection,int ID_sauvegarde, int id_inventaire, int i) {
         try{
             String Query = "insert into objet(nom_objet,XP,x,y)values('potionSoin" + i + "'," + this.XP+',' + this.pos.x+',' + this.pos.y + ") ";
@@ -73,7 +73,7 @@ public class PotionSoin extends Objet{
      * @param id_inventaire
      * @param nom_potionSoin
      */
-    @Override
+
     public void getFromDatabase(Connection connection, Integer id,int id_inventaire, String nom_potionSoin) {
         try{
         String Query = "select nom_potionSoin,XP,x,y from objet inner join contient_potionSoin using(nom_potionSoin) inner join inventaire using(id_inventaire) inner join contient_inventaire using(id_inventaire) where id_sauvegarde= " + id+"and id_inventaire="+id_inventaire+" and nom_potionSoin='"+nom_potionSoin+"'";

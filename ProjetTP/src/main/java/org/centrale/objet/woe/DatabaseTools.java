@@ -14,7 +14,8 @@ import java.util.logging.Logger;
 import java.sql.*;
 
 /**
- *
+ * la classe DatabaseTools assure la connection à une base de donnée
+ * ainsi que la sauvegarde et le chargement d'un monde
  * @author nourkouki
  */
 public class DatabaseTools {

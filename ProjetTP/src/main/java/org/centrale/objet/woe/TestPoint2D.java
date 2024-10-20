@@ -5,7 +5,7 @@
 package org.centrale.objet.woe;
 
 /**
- *
+ * Permet de tester le bon fonctionement de Point2D
  * @author nourkouki
  * @author dghanmi
  */

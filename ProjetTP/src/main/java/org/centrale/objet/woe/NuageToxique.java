@@ -7,6 +7,12 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Permet de gérer les nuage toxiques
+ * @author nourkouki
+ * @author dghanmi
+ */
+
 public class NuageToxique extends Objet implements Deplacable {
     public NuageToxique(Point2D pos, int pts){
         super(pos, pts);
@@ -18,49 +24,72 @@ public class NuageToxique extends Objet implements Deplacable {
      *
      * @param connection
      * @param ID_sauvegarde
-     * @param id_inventaire
      * @param i
      */
 
-    @Override
-    public void saveToDatabase(Connection connection, int ID_sauvegarde, int id_inventaire, int i) {
-        try{
-           String Query="insert into objet(nom_objet,XP,x,y)values('NuageToxique" + i + "'," + this.XP+',' +this.pos.x+','+this.pos.y+") " ;
-           PreparedStatement stm=connection.prepareStatement(Query);
-           stm.executeUpdate();
-           String Query2="insert into contient_nuage_tox(nom_nuage_tox,id_inventaire)values('NuageToxique" + i + "'," +id_inventaire+") " ;
-           PreparedStatement stm2=connection.prepareStatement(Query2);
-           stm2.executeUpdate();
-           System.out.println("Nourriture nom: NuageToxique" + i + "'," +" a la position:["+this.pos.x+","+this.pos.y+"]");
-           
-        }
-      catch (SQLException ex) {
-            Logger.getLogger(DatabaseTools.class.getName()).log(Level.SEVERE, null, ex);
-            
-        }
+
+    public void saveToDatabase(Connection connection, int ID_sauvegarde, int i) {
+    try {
+        // Requête pour insérer un objet dans la table "Objet"
+        String query = "INSERT INTO Objet(nom_objet, XP, x, y) VALUES (?, ?, ?, ?)";
+        PreparedStatement stm = connection.prepareStatement(query);
+        
+        // Définir les paramètres pour la requête
+        stm.setString(1, "NuageToxique" + i);          // nom_objet (ex: 'NuageToxique1')
+        stm.setInt(2, this.XP);                // XP (expérience de l'objet)
+        stm.setInt(3, this.pos.getX());        // x (coordonnée X)
+        stm.setInt(4, this.pos.getY());        // y (coordonnée Y)
+
+        // Exécuter la requête
+        stm.executeUpdate();
+
+        // Confirmation dans la console
+        System.out.println("Nuage Toxique nom: NuageToxique" + i + " à la position: [" + this.pos.getX() + "," + this.pos.getY() + "]");
+        } catch (SQLException ex) {
+        Logger.getLogger(DatabaseTools.class.getName()).log(Level.SEVERE, null, ex);
     }
+}
 
     /**
      *
      * @param connection
      * @param id
-     * @param id_inventaire
-     * @param nom_nuage_tox
+     * @param nom_objet
      */
-    @Override
-    public void getFromDatabase(Connection connection, Integer id,int id_inventaire,String nom_nuage_tox) {
-        try{
-        String Query = "select nom_objet,XP,x,y from objet o inner join contient_nuage_tox c on o.nom_objet=c.nom_nuage_tox inner join inventaire using(id_inventaire) inner join contient_inventaire using(id_inventaire) where id_sauvegarde= " + id+"and id_inventaire="+id_inventaire+" and nom_nuage_tox='"+nom_nuage_tox+"'";
-        PreparedStatement stm = connection.prepareStatement(Query);
+
+    public void getFromDatabase(Connection connection, Integer id, String nom_objet) {
+    try {
+        // Requête avec des paramètres pour éviter la concaténation
+        String query = "SELECT o.nom_objet, o.XP, o.x, o.y "
+                     + "FROM objet o "
+                     + "INNER JOIN est_dans_une_sauv s on s.nom_objet=o.nom_objet "
+                     + "INNER JOIN partie p on s.id_partie=p.id_partie "
+                     + "WHERE p.id_sauvegarde = ? AND o.nom_objet = ?";
+        
+        PreparedStatement stm = connection.prepareStatement(query);
+        
+        // Définir les paramètres pour la requête
+        stm.setString(1, id.toString());                // Paramètre 1 : id_sauvegarde
+        stm.setString(2, nom_objet);       // Paramètre 3 : nom_objet
+        
+        // Exécuter la requête
         ResultSet rs = stm.executeQuery();
-        rs.next();
-        this.pos.x=rs.getInt("x");
-        this.pos.y=rs.getInt("y");
-        this.XP=rs.getInt("XP");
-        System.out.println("nom nuage toxique est: "+ nom_nuage_tox +" x: "+this.pos.x+" y: "+this.pos.y);
-        } catch (SQLException ex) {
-            Logger.getLogger(DatabaseTools.class.getName()).log(Level.SEVERE, null, ex);
+
+        // Si un résultat est trouvé, récupérer les valeurs
+        if (rs.next()) {
+            if (this.pos == null) {
+                this.pos = new Point2D();  // Initialiser pos si elle est null
+            }
+            this.pos.setX(rs.getInt("x"));  // Récupérer x
+            this.pos.setY(rs.getInt("y"));  // Récupérer y
+            this.XP = rs.getInt("XP");      // Récupérer les points d'expérience (XP)
             
+            System.out.println("Nom du nuage toxique : " + nom_objet + " Position: [" + this.pos.getX() + ", " + this.pos.getY() + "] XP: " + this.XP);
+        } else {
+            System.out.println("Aucun nuage toxique trouvée avec le nom: " + nom_objet);
         }
+    } catch (SQLException ex) {
+        Logger.getLogger(DatabaseTools.class.getName()).log(Level.SEVERE, null, ex);
     }
+}
 }

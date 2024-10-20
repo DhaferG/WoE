@@ -27,7 +27,5 @@ public abstract class Objet extends ElementDeJeu{
         this.XP=pts;
     }
     
-    public abstract void saveToDatabase(Connection connection,int ID_sauvegarde,int id_inventaire,int i);
-    public abstract void getFromDatabase(Connection connection, Integer id,int id_inventaire,String nom_objet);
     
 }

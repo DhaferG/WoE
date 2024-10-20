@@ -1,5 +1,10 @@
 package org.centrale.objet.woe;
 
+/**
+ * la classe ElementDeJeu permet de gérer les positions d'un élement de jeu
+ * @author nourkouki
+ * @author dghanmi
+ */
 public abstract class ElementDeJeu {
     Point2D pos;
     /*Constructeur de la classe élement de jeu

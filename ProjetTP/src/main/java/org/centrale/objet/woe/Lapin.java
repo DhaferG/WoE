@@ -69,11 +69,16 @@ public class Lapin extends Monstre {
         stmCreature.setInt(3, this.pos.getY());      // pos_y
         stmCreature.executeUpdate();
         // Deuxième requête pour insérer dans la table 'monstre'
-        String queryMonstre = "INSERT INTO monstre(id_mon, id_creature, type_monstre) VALUES (?, ?, ?)";
+        String queryMonstre = "INSERT INTO monstre(id_mon, id_creature, type_monstre, ptvie, ptdeg, ptpar, ptatt, papar) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement stmMonstre = connection.prepareStatement(queryMonstre);
-        stmMonstre.setString(1, "lapin" + i);         // id_mon (ex: 'loup1')
+        stmMonstre.setString(1, "lapin" + i);         // id_mon (ex: 'lapin1')
         stmMonstre.setString(2, "c-" + i);           // id_creature (ex: 'c-1')
-        stmMonstre.setString(3, "Lapin");             // type_monstre (toujours 'Loup')
+        stmMonstre.setString(3, "Lapin");             // type_monstre
+        stmMonstre.setInt(4, this.ptVie);                 // pt_vie
+        stmMonstre.setInt(5, this.degAtt);                // deg_att
+        stmMonstre.setInt(6, this.ptPar);                 // pt_par
+        stmMonstre.setInt(7, this.pageAtt);               // page_att
+        stmMonstre.setInt(8, this.pagePar);               // page_att
         stmMonstre.executeUpdate();
 
         // Confirmation dans la console
@@ -97,10 +102,11 @@ public class Lapin extends Monstre {
                      + "FROM monstre m "
                      + "INNER JOIN creature c USING(id_creature) "
                      + "INNER JOIN est_dans_une_sauv s USING(id_creature) "
+                     + "INNER JOIN partie p on s.id_partie=p.id_partie "
                      + "WHERE s.id_sauvegarde = ? AND m.type_mon = 'Lapin' AND m.id_mon = ?";
         
         PreparedStatement stm = connection.prepareStatement(query);
-        stm.setInt(1, id);                // Paramètre 1 : id_sauvegarde
+        stm.setString(1, id.toString());                // Paramètre 1 : id_sauvegarde
         stm.setString(2, nom_monstre);    // Paramètre 2 : id_mon
         
         ResultSet rs = stm.executeQuery();

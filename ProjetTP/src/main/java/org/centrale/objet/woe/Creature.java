@@ -37,10 +37,7 @@ public abstract class Creature extends ElementDeJeu implements Deplacable{
      * pourcentage de parade
      */
     public int pagePar;
-    
-    /**
-     * position
-     */
+
 
     // constructeurs
     /**

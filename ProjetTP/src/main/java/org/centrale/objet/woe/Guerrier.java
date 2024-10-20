@@ -38,7 +38,6 @@ public class Guerrier extends Personnage implements Combattant {
      */
     public Guerrier(Guerrier g) {
         super(g);
-        this.pos= new Point2D(g.pos);
     }
 
     public Guerrier() {
@@ -87,15 +86,22 @@ public class Guerrier extends Personnage implements Combattant {
             stm1.setInt(2, this.pos.getX());                  // pos_x
             stm1.setInt(3, this.pos.getY());                  // pos_y
             stm1.executeUpdate();
-            String Query = "INSERT INTO humanoide(nom_hum, id_hum, id_creature, type_hum) VALUES (?, ?, ?, ?)";
-            PreparedStatement stm = connection.prepareStatement(Query);
-            // Utilisation de paramètres pour les valeurs
-            stm.setString(1, this.nom);                  // nom_hum
-            stm.setString(2, "h-" + i);                  // id_hum (h-i)
-            stm.setString(3, "c-" + i);                  // id_creature (c-i)
-            stm.setString(4, "Guerrier");                  // type_hum
+            String query = "INSERT INTO humanoide(nom_hum, id_hum, id_creature, type_hum, ptvie, ptdeg, ptpar, ptatt, dist_max_att) "
+             + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            PreparedStatement stm = connection.prepareStatement(query);
+
+            // Utilisation des paramètres pour les valeurs
+            stm.setString(1, this.nom);                // nom_hum
+            stm.setString(2, "h-" + i);                // id_hum (ex: 'h-1')
+            stm.setString(3, "c-" + i);                // id_creature (ex: 'c-1')
+            stm.setString(4, "Guerrier");                // type_hum 
+            stm.setInt(5, this.ptVie);                 // pt_vie
+            stm.setInt(6, this.degAtt);                // deg_att
+            stm.setInt(7, this.ptPar);                 // pt_par
+            stm.setInt(8, this.pageAtt);               // page_att
+            stm.setInt(9, this.distAttMax);           // dist_att_max
+            // Exécuter la requête
             stm.executeUpdate();
-            
             System.out.println("Guerrier nom:" + this.nom + i);
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseTools.class.getName()).log(Level.SEVERE, null, ex);
@@ -110,26 +116,29 @@ public class Guerrier extends Personnage implements Combattant {
      * @param id
      * @param nom_humanoide
      */
-
+    
     public void getFromDatabase(Connection connection, Integer id, String nom_humanoide) {
         try {
             String query = "SELECT h.nom_hum, h.id_hum, c.pos_x, c.pos_y FROM humanoide h "
-                         + "INNER JOIN creature c USING(id_creature) "
-                         + "INNER JOIN est_dans_une_sauv s USING(id_creature) "
-                         + "WHERE s.id_sauvegarde = ? AND h.type_hum = 'Guerrier' AND h.nom_hum = ?";
+                         + "INNER JOIN creature c on h.id_creature=c.id_creature "
+                         + "INNER JOIN est_dans_une_sauv s on s.id_creature=c.id_creature "
+                         + "INNER JOIN partie p on s.id_partie=p.id_partie "
+                         + "WHERE p.id_sauvegarde = ? AND h.type_hum = 'Guerrier' AND h.nom_hum = ?";
             
             PreparedStatement stm = connection.prepareStatement(query);
-            ResultSet rs = stm.executeQuery();
-            stm.setInt(1, id);
+            stm.setString(1, id.toString());
             stm.setString(2, nom_humanoide);
-            rs.next();
-            while (rs.next()) {
+            ResultSet rs = stm.executeQuery();
+            if (!rs.next()) {
+                System.out.println("Aucun résultat trouvé pour id_sauvegarde=" + id + " et nom_humanoide=" + nom_humanoide);
+            } else {
+            do {
                 this.nom = rs.getString("nom_hum");
-                this.pos.x = rs.getInt("pos_x");
-                this.pos.y = rs.getInt("pos_y");
-                System.out.println("Guerrier chargé : nom=" + this.nom + " position=(" + this.pos.x + ", " + this.pos.y + ")");
-            
-            }
+                this.pos.setX(rs.getInt("pos_x"));
+                this.pos.setY(rs.getInt("pos_y"));
+                System.out.println("Guerrier chargé : nom=" + this.nom + " position=(" + this.pos.getX() + ", " + this.pos.getY() + ")");
+            } while (rs.next());
+}
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseTools.class.getName()).log(Level.SEVERE, null, ex);
 
