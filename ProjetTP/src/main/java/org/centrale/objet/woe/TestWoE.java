@@ -25,8 +25,8 @@ public class TestWoE {
         //database.readWorld(playerId, "Partie1", "sauv1", monde);
         //Point2D p = new Point2D(2,5);
         // Créer un Archer avec la position initialisée
-        Loup l= new Loup();
-        l.pos.afficher();
+        Archer a= new Archer();
+        a.pos.afficher();
         //archer.saveToDatabase(database.connection, 1, 1);
         
     /*    // Création du monde

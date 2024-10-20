@@ -54,22 +54,30 @@ public class Loup extends Monstre implements Combattant {
      * @param ID_sauvegarde
      * @param i
      */
-    @Override
+
     public void saveToDatabase(Connection connection, int ID_sauvegarde, int i) {
-        try {
-            String Query = "insert into monstre(id_mon, id_creature, type_monstre) values('loup" + i + "'," + "', c- '" + i + "', 'Loup')";
-            PreparedStatement stm = connection.prepareStatement(Query);
-            stm.executeUpdate();
-            String Query1 = "insert into creature(id_creature, pos_x, pos_y) values('c-" + i + "', " + this.pos.x + ", " + this.pos.y + ")";
-            PreparedStatement stm1 = connection.prepareStatement(Query1);
-            stm1.executeUpdate();
-            System.out.println("Loup nom:loup" + i);
-        } catch (SQLException ex) {
-            Logger.getLogger(DatabaseTools.class.getName()).log(Level.SEVERE, null, ex);
+    try {
+        // Première requête pour insérer dans la table 'creature'
+        String queryCreature = "INSERT INTO creature(id_creature, pos_x, pos_y) VALUES (?, ?, ?)";
+        PreparedStatement stmCreature = connection.prepareStatement(queryCreature);
+        stmCreature.setString(1, "c-" + i);          // id_creature (ex: 'c-1')
+        stmCreature.setInt(2, this.pos.getX());      // pos_x
+        stmCreature.setInt(3, this.pos.getY());      // pos_y
+        stmCreature.executeUpdate();
+        // Deuxième requête pour insérer dans la table 'monstre'
+        String queryMonstre = "INSERT INTO monstre(id_mon, id_creature, type_monstre) VALUES (?, ?, ?)";
+        PreparedStatement stmMonstre = connection.prepareStatement(queryMonstre);
+        stmMonstre.setString(1, "loup" + i);         // id_mon (ex: 'loup1')
+        stmMonstre.setString(2, "c-" + i);           // id_creature (ex: 'c-1')
+        stmMonstre.setString(3, "Loup");             // type_monstre (toujours 'Loup')
+        stmMonstre.executeUpdate();
 
-        }
-
+        // Confirmation dans la console
+        System.out.println("Loup nom: loup" + i);
+    } catch (SQLException ex) {
+        Logger.getLogger(DatabaseTools.class.getName()).log(Level.SEVERE, null, ex);
     }
+}
 
     /**
      *
@@ -77,21 +85,33 @@ public class Loup extends Monstre implements Combattant {
      * @param id
      * @param nom_monstre
      */
-    @Override
-    public void getFromDatabase(Connection connection, Integer id, String nom_monstre) {
-        try {
-            String Query = "select m.id_mon, c.pos_x, c.pos_y from monstre m inner join creature c using(id_creature) inner join est_dans_une_sauv s using(id_creature) where s.id_sauvegarde= " + id + "and m.type_mon='Loup'and m.id_mon='" + nom_monstre + "'";
-            PreparedStatement stm = connection.prepareStatement(Query);
-            ResultSet rs = stm.executeQuery();
-            rs.next();
-            while (rs.next()) {
-                this.pos.x = rs.getInt("c.pos_x");
-                this.pos.y = rs.getInt("c.pos_y");
-                System.out.println("nom_monstre: " + nom_monstre + " x: " + this.pos.x + " y: " + this.pos.y);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(DatabaseTools.class.getName()).log(Level.SEVERE, null, ex);
 
+    public void getFromDatabase(Connection connection, Integer id, String nom_monstre) {
+    try {
+        // Requête pour récupérer les informations du monstre et de la créature
+        String query = "SELECT m.id_mon, c.pos_x, c.pos_y "
+                     + "FROM monstre m "
+                     + "INNER JOIN creature c USING(id_creature) "
+                     + "INNER JOIN est_dans_une_sauv s USING(id_creature) "
+                     + "WHERE s.id_sauvegarde = ? AND m.type_mon = 'Loup' AND m.id_mon = ?";
+        
+        PreparedStatement stm = connection.prepareStatement(query);
+        stm.setInt(1, id);                // Paramètre 1 : id_sauvegarde
+        stm.setString(2, nom_monstre);    // Paramètre 2 : id_mon
+        
+        ResultSet rs = stm.executeQuery();
+
+        // Si des résultats sont trouvés, récupérer les coordonnées
+        if (rs.next()) {
+            this.pos.setX(rs.getInt("pos_x"));
+            this.pos.setY(rs.getInt("pos_y"));
+            System.out.println("nom_monstre: " + nom_monstre + " x: " + this.pos.getX() + " y: " + this.pos.getY());
+        } else {
+            System.out.println("Aucun Loup trouvé avec le nom: " + nom_monstre);
         }
+    } catch (SQLException ex) {
+        Logger.getLogger(DatabaseTools.class.getName()).log(Level.SEVERE, null, ex);
     }
+}
+
 }

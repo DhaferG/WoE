@@ -77,15 +77,25 @@ public class Guerrier extends Personnage implements Combattant {
      * @param ID_sauvegarde
      * @param i
      */
-    @Override
+
     public void saveToDatabase(Connection connection, int ID_sauvegarde, int i) {
         try {
-            String Query = "insert into humanoide(nom_hum, id_hum, id_creature, type_hum) values('" + this.nom + "', h- '" + i + "', c- '" + i + "', 'Guerrier')";
-            PreparedStatement stm = connection.prepareStatement(Query);
-            stm.executeUpdate();
-            String Query1 = "insert into creature(id_creature, pos_x, pos_y) values('c-" + i + "', " + this.pos.x + ", " + this.pos.y + ")";
+            String Query1 = "insert into creature(id_creature, pos_x, pos_y) VALUES (?, ?, ?)";
             PreparedStatement stm1 = connection.prepareStatement(Query1);
+            // Utilisation de paramètres pour les valeurs
+            stm1.setString(1, "c-" + i);                 // id_creature
+            stm1.setInt(2, this.pos.getX());                  // pos_x
+            stm1.setInt(3, this.pos.getY());                  // pos_y
             stm1.executeUpdate();
+            String Query = "INSERT INTO humanoide(nom_hum, id_hum, id_creature, type_hum) VALUES (?, ?, ?, ?)";
+            PreparedStatement stm = connection.prepareStatement(Query);
+            // Utilisation de paramètres pour les valeurs
+            stm.setString(1, this.nom);                  // nom_hum
+            stm.setString(2, "h-" + i);                  // id_hum (h-i)
+            stm.setString(3, "c-" + i);                  // id_creature (c-i)
+            stm.setString(4, "Guerrier");                  // type_hum
+            stm.executeUpdate();
+            
             System.out.println("Guerrier nom:" + this.nom + i);
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseTools.class.getName()).log(Level.SEVERE, null, ex);
@@ -100,24 +110,29 @@ public class Guerrier extends Personnage implements Combattant {
      * @param id
      * @param nom_humanoide
      */
-    @Override
+
     public void getFromDatabase(Connection connection, Integer id, String nom_humanoide) {
         try {
-            String Query = "select h.nom_hum, h.id_hum, c.pos_x, c.pos_y from humanoide h inner join creature c using(id_creature) inner join est_dans_une_sauv s using(id_creature) where s.id_sauvegarde= " + id + "and h.type_hum='Guerrier'and h.nom_hum='" + nom_humanoide + "'";
-            PreparedStatement stm = connection.prepareStatement(Query);
+            String query = "SELECT h.nom_hum, h.id_hum, c.pos_x, c.pos_y FROM humanoide h "
+                         + "INNER JOIN creature c USING(id_creature) "
+                         + "INNER JOIN est_dans_une_sauv s USING(id_creature) "
+                         + "WHERE s.id_sauvegarde = ? AND h.type_hum = 'Guerrier' AND h.nom_hum = ?";
+            
+            PreparedStatement stm = connection.prepareStatement(query);
             ResultSet rs = stm.executeQuery();
+            stm.setInt(1, id);
+            stm.setString(2, nom_humanoide);
             rs.next();
             while (rs.next()) {
-                this.nom = rs.getString("h.nom_hum");
-                this.pos.x = rs.getInt("c.pos_x");
-                this.pos.y = rs.getInt("c.pos_y");
-                System.out.println("Guerrier: nom: " + this.nom + " x: " + this.pos.x + " y: " + this.pos.y);
-
+                this.nom = rs.getString("nom_hum");
+                this.pos.x = rs.getInt("pos_x");
+                this.pos.y = rs.getInt("pos_y");
+                System.out.println("Guerrier chargé : nom=" + this.nom + " position=(" + this.pos.x + ", " + this.pos.y + ")");
+            
             }
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseTools.class.getName()).log(Level.SEVERE, null, ex);
 
         }
     }
-    
 }

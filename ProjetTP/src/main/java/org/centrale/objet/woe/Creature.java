@@ -85,8 +85,5 @@ public abstract class Creature extends ElementDeJeu implements Deplacable{
 
     }
     
-    public abstract void saveToDatabase(Connection connection,int ID_sauvegarde,int i);
-    public abstract void getFromDatabase(Connection connection, Integer id,String nom_creature);
-
     
 }

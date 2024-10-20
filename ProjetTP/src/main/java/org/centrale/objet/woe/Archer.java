@@ -101,7 +101,7 @@ public class Archer extends Personnage implements Combattant {
      * @param ID_sauvegarde
      * @param i
      */
-    @Override
+
     public void saveToDatabase(Connection connection, int ID_sauvegarde, int i) {
         try {
             String Query1 = "insert into creature(id_creature, pos_x, pos_y) VALUES (?, ?, ?)";
@@ -134,7 +134,7 @@ public class Archer extends Personnage implements Combattant {
      * @param id
      * @param nom_humanoide
      */
-    @Override
+
     public void getFromDatabase(Connection connection, Integer id, String nom_humanoide) {
         try {
             String query = "SELECT h.nom_hum, h.id_hum, c.pos_x, c.pos_y FROM humanoide h "
@@ -159,5 +159,6 @@ public class Archer extends Personnage implements Combattant {
 
         }
     }
+    
 }
 
