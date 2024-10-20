@@ -5,5 +5,6 @@ public interface Utilisable {
     public int BuffDuration();
     public void SetBuffDuration(int i);
     public void DebuffAfterEnd(Joueur j);
+    public int getBuffDetails();
 
 }

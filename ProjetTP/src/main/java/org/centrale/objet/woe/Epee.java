@@ -37,5 +37,8 @@ public class Epee extends Objet implements Utilisable{
         Personnage p = j.getPersonnage();
         p.setDegAtt(p.getDegAtt()-this.degAtt);
     }
+    public int getBuffDetails(){
+        return this.degAtt;
+    }
     
 }

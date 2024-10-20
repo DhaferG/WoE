@@ -17,11 +17,10 @@ public class Joueur {
     private Personnage p;
     private World w;
     public Inventaire inventaire;
-    private ArrayList<Utilisable> Buffs;
+    public ArrayList<Utilisable> Buffs;
     private int Maxhealth;
-    private int XP;
-    private String username;
-    private String password;
+    public int XP;
+    public String username;
     
     //constructeurs
     public Joueur(World w) {
@@ -49,7 +48,7 @@ public class Joueur {
     public Personnage choisirPersonnage() {
         Scanner scanner = new Scanner(System.in);
         Random rand = new Random();
-
+        System.out.println("Welcome to WoE. After creating your character a graphical interface will start. Press H for how to play, P for pause and Q to quit. Enjoy!");
         System.out.println("Choisissez un type de personnage jouable (Guerrier, Archer) :");
         String type = scanner.nextLine();
 
@@ -76,8 +75,8 @@ public class Joueur {
             return new Archer(pointsVie, degAtt, parade, paradeAttaque, parade, distAttMax, position, nbFleches);
         } else {
             System.out.println("Type de personnage non jouable. Choisissez un Guerrier ou un Archer.");
-            scanner.close();
-            return choisirPersonnage(); // Recommence si le type est invalide
+            return choisirPersonnage();
+             // Recommence si le type est invalide
         }
     }
     /**
@@ -102,23 +101,26 @@ public class Joueur {
             if (inventaire.getObjet(i) instanceof PotionSoin){
                 PotionSoin a = (PotionSoin) inventaire.getObjet(i);
                 a.consume(this);
+                this.inventaire.removeObjet(i);
             }
             if (inventaire.getObjet(i) instanceof Epee){
                 Epee a = (Epee) inventaire.getObjet(i);
                 a.use(this);
                 this.AddBuff(a);
+                this.inventaire.removeObjet(i);
             }
             if (inventaire.getObjet(i) instanceof Nourriture){
                 Nourriture a = (Nourriture) inventaire.getObjet(i);
                 a.use(this);
                 this.AddBuff(a);
+                this.inventaire.removeObjet(i);
             }
         }
 
     }
     public void update(){
-        for (int i=0;i<6;i++){
-            this.Buffs.get(i).SetBuffDuration(this.Buffs.get(i).BuffDuration()-1);
+        for (Utilisable b: this.Buffs){
+            b.SetBuffDuration(b.BuffDuration()-1);
         }
         this.Debuff();
     }

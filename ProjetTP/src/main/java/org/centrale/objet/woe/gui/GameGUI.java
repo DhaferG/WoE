@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class GameGUI extends JPanel implements ActionListener, KeyListener {
-    private static final int TILE_SIZE = 30;
+    private static final int TILE_SIZE = 25;
     private static final int WORLD_SIZE = 50; // 50x50 world grid
     private static final int VIEW_SIZE = WORLD_SIZE / 2; // 1/4 of the world grid visible (25x25 tiles)
     
@@ -22,6 +22,7 @@ public class GameGUI extends JPanel implements ActionListener, KeyListener {
     
     // Images for different types of elements
     private Map<Class<? extends ElementDeJeu>, Image> elementImages;
+    private Map<Class<? extends ElementDeJeu>, String> elementImagePaths;
 
     public GameGUI(World world, Joueur player, JLabel playerInfoLabel) {
         this.world = world;
@@ -37,6 +38,7 @@ public class GameGUI extends JPanel implements ActionListener, KeyListener {
 
         // Initialize the element images
         this.loadElementImages();
+        this.loadElementImagePaths();
 
         this.setPreferredSize(new Dimension(VIEW_SIZE * TILE_SIZE, VIEW_SIZE * TILE_SIZE));
         this.setBackground(Color.WHITE);
@@ -57,9 +59,23 @@ public class GameGUI extends JPanel implements ActionListener, KeyListener {
         elementImages.put(Lapin.class, new ImageIcon(getClass().getResource("/images/rabbit.png")).getImage());
         elementImages.put(PotionSoin.class, new ImageIcon(getClass().getResource("/images/potion.png")).getImage());
         elementImages.put(Nourriture.class, new ImageIcon(getClass().getResource("/images/food.png")).getImage());
+        elementImages.put(Epee.class, new ImageIcon(getClass().getResource("/images/sword.png")).getImage());
         elementImages.put(NuageToxique.class, new ImageIcon(getClass().getResource("/images/cloud.png")).getImage());
         
     }
+
+    private void loadElementImagePaths() {
+        elementImagePaths = new HashMap<>();
+        elementImagePaths.put(Guerrier.class, "/images/warrior.png");
+        elementImagePaths.put(Archer.class, "/images/archer.png");
+        elementImagePaths.put(Paysan.class, "/images/peasant.png");
+        elementImagePaths.put(Loup.class, "/images/wolf.png");
+        elementImagePaths.put(Lapin.class, "/images/rabbit.png");
+        elementImagePaths.put(PotionSoin.class, "/images/potion.png");
+        elementImagePaths.put(Nourriture.class, "/images/food.png");
+        elementImagePaths.put(NuageToxique.class, "/images/cloud.png");
+        elementImagePaths.put(Epee.class, "/images/sword.png");
+}
 
     public void setPlayerImage() {
         if (this.player instanceof Guerrier) {
@@ -115,8 +131,7 @@ public class GameGUI extends JPanel implements ActionListener, KeyListener {
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
-        repaint(); // Repaint the panel to update character positions
+    public void actionPerformed(ActionEvent e) { // Repaint the panel to update character positions
     }
 
     @Override
@@ -137,7 +152,10 @@ public class GameGUI extends JPanel implements ActionListener, KeyListener {
                 JOptionPane.showMessageDialog(this, "Game Paused. Press 'ENTER' to resume.", "Pause", JOptionPane.INFORMATION_MESSAGE);
                 break;
             case KeyEvent.VK_H: 
-                JOptionPane.showMessageDialog(this, "Arrow Keys to move, F to pick into inventory, C to combat, number keys to use inventory", "How to play", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Arrow Keys to move, F to pick into inventory,"+ 
+                "C to combat, number keys(on top of the 1st row of letters in keyboard) to use inventory \n "+
+                "Kill wolves, warriors and archers to gain XP\n Gather items and use them for magic effects \n"+ 
+                "Have fun", "How to play", JOptionPane.INFORMATION_MESSAGE);
                 break;
             case KeyEvent.VK_UP:
                 play.deplacer(0, -1);
@@ -176,6 +194,7 @@ public class GameGUI extends JPanel implements ActionListener, KeyListener {
                 play.combattre();
                 break;
         }
+        this.play.update();
         updatePlayerInfo();
         this.world.update(this.play);
         repaint();
@@ -193,39 +212,99 @@ public class GameGUI extends JPanel implements ActionListener, KeyListener {
 
     // Update the player info in the info panel
     private void updatePlayerInfo() {
-        int healthPercentage = (int) ((player.ptVie / (double) play.getMaxHealth()) * 100);
-        String healthBarColor = "red"; // You can adjust this to change color based on health value
+        // Calculate health percentage and adjust for display
+        int healthPercentage = (int) (((float)player.ptVie /(float)play.getMaxHealth()) * 100);
         
-        String healthBar = "<div style='width: 100px; height: 20px; background-color: lightgray;'>" +
-                        "<div style='width: " + healthPercentage + "px; height: 100%; background-color: " + healthBarColor + ";'></div>" +
-                        "</div>";
+        // Generate the health bar with a red background and green foreground
+        String healthBar = "<div style='width: 100px; height: 20px; background-color: red;'>" +
+                            "<div style='width: " + healthPercentage + "px; height: 20px; background-color: green;'></div>" +
+                            "</div>";
+    
+        StringBuilder inventorySlots = new StringBuilder();
+        inventorySlots.append("<table border='1' cellpadding='10'><tr>");
+    
+        for (int i = 0; i < 6; i++) {
+            Objet item = play.inventaire.getObjet(i);  // Method to get the item in the inventory slot
+            if (item != null) {
+                // Get the image path for the item class from elementImagePaths map
+                String itemImagePath = elementImagePaths.get(item.getClass());
+                if (itemImagePath != null) {
+                    // Embed the image using the path in the HTML img tag
+                    inventorySlots.append("<td><img src='")
+                        .append(getClass().getResource(itemImagePath))
+                        .append("' width='40' height='40'/></td>");  // Adjust image size as needed
+                } else {
+                    inventorySlots.append("<td>Unknown Item</td>");
+                }
+            } else {
+                // If the slot is empty, display a placeholder or "Empty"
+                inventorySlots.append("<td>Empty</td>");
+            }
+    
+            // After 3 items, break the row
+            if (i == 2) {
+                inventorySlots.append("</tr><tr>");
+            }
+        }
+    
+        // Close the table after adding all slots
+        inventorySlots.append("</tr></table>");
+        
+        StringBuilder effectsSlots = new StringBuilder();
+        effectsSlots.append("<table border='1' cellpadding='10'><tr>");
+        // Assuming 'player' has a list of effects or buffs (e.g., play.getEffects())
+        for (Utilisable effect : play.Buffs) {
+            // Get the image path for the effect class
+            String effectImagePath = elementImagePaths.get(effect.getClass());
+            if (effectImagePath != null) {
+                // Embed the image and add effect text (e.g., effect type and duration)
+                effectsSlots.append("<td><img src='")
+                    .append(getClass().getResource(effectImagePath))
+                    .append("' width='40' height='40'/><br/>")
+                    .append("Type: ").append(effect.getBuffDetails()).append("<br/>")  // Effect type
+                    .append("Duration: ").append(effect.BuffDuration()).append("</td>");  // Effect duration
+            } else {
+                // If no image found, just display effect info
+                effectsSlots.append("<td>Unknown Effect<br/>")
+                    .append("Type: ").append(effect.getBuffDetails()).append("<br/>")
+                    .append("Duration: ").append(effect.BuffDuration()).append("</td>");
+            }
 
-        // Generate the HTML for the inventory slots (two rows of three)
-        String inventorySlots = "<table border='1' cellpadding='10'>" +
-                                "<tr>" +
-                                "<td>Slot 1</td><td>Slot 2</td><td>Slot 3</td>" +
-                                "</tr><tr>" +
-                                "<td>Slot 4</td><td>Slot 5</td><td>Slot 6</td>" +
-                                "</tr></table>";
+            // After 3 effects, break the row
+            if (effectsSlots.length() % 3 == 0) {
+                effectsSlots.append("</tr><tr>");
+            }
+        }
 
-        // Update the player info label with the new layout
-        String info = "<html>" +
-                    "<div style='display: flex;'>" +
-                    "<div style='flex: 1;'>" + 
-                    "Player: " + player.nom + "<br/>" +
-                    "Attack Points: " + player.pageAtt + "<br/>" +
-                    "Damage: " + player.degAtt + "<br/>" +
-                    "Health: " + player.ptVie + "<br/>" +
-                    "Range: " + player.distAttMax + "<br/>" +
-                    "Position: (" + (int) player.pos.getX() + ", " + (int) player.pos.getY() + ")<br/>" +
-                    "</div>" +
-                    "<div style='flex: 1; display: flex; flex-direction: column; align-items: flex-end;'>" +
-                    "<div>Health:<br/>" + healthBar + "</div>" +
-                    "<div>Inventory:<br/>" + inventorySlots + "</div>" +
-                    "</div>" +
-                    "</div>" +
+        // If no effects are present, display "No Effects"
+        if (play.Buffs.isEmpty()) {
+            effectsSlots.append("<td>No Effects</td>");
+        }
+        // Generate the player stats section
+        String playerStats = "Player: " + play.username + "<br/>" +
+                                "Score: " + play.XP + "<br/>" +
+                                "Attack Chance: " + player.pageAtt + "<br/>" +
+                                "Damage: " + player.degAtt + "<br/>" +
+                                "Health: " + player.ptVie + "<br/>" +
+                                "Range: " + player.distAttMax + "<br/>" +
+                                "Parry Chance: " + player.pagePar + "<br/>" +
+                                "Parry Amount: " + player.ptPar + "<br/>" +
+                                "Position: (" + (int) player.pos.getX() + ", " + (int) player.pos.getY() + ")<br/>";
+        if (player instanceof Archer){
+            playerStats+="Quiver Count: " + ((Archer)player).nbFleches + "<br/>";
+        }
+    
+    // Update the player info label with the new layout using a table with three columns
+    String info = "<html>" +
+                    "<table style='width:100%;'>" +
+                    "<tr>" +
+                    "<td style='vertical-align:top;'>" + playerStats + "</td>" +   // Column 1: Player Stats
+                    "<td style='vertical-align:top;'>" + inventorySlots + "</td>" + // Column 2: Inventory Slots
+                    "<td style='vertical-align:top; text-align:right;'>Health:<br/>" + healthBar + "</td>" + // Column 3: Health Bar
+                    "<td style='vertical-align:top; text-align:left;'>Effects:<br/>" + effectsSlots + "</td>" +  // Column 4: Effects
+                    "</tr>" +
+                    "</table>" +
                     "</html>";
-
         playerInfoLabel.setText(info);
     }
 

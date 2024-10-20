@@ -31,7 +31,7 @@ public class PotionSoin extends Objet{
             System.out.println("Potion Wasted");
         }
         else{
-            j.getPersonnage().setPtVie(j.getPersonnage().getPtVie()+this.health);
+            j.getPersonnage().setPtVie(Math.min(j.getPersonnage().getPtVie()+this.health,j.getMaxHealth()));
         }
     }
 }

@@ -22,5 +22,7 @@ public class Nourriture extends Objet implements Utilisable {
         Personnage p = j.getPersonnage();
         p.setPtPar(p.getPagePar()-this.DefBoost);
     }
-
+    public int getBuffDetails(){
+        return this.DefBoost;
+    }
 }

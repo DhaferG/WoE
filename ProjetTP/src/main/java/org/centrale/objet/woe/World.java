@@ -59,49 +59,49 @@ public class World {
         int m = rand.nextInt(n)+40;
         final int[] positions = new Random().ints(0, 50).limit(m+1).toArray();
         for (int i=0;i<m;i++){
-            int d = rand.nextInt(100);
-            if (d<10){
+            int d = rand.nextInt(101);
+            if (d<8){
                 Point2D p = new Point2D(positions[i], positions[i+1]);
                 Guerrier g = new Guerrier(300,10,15,50,20,1,p);
                 a.put(p, g);
                 this.EnemyCreats.put(p, g);
                 espaceJeu[positions[i]][positions[i+1]]=g;
             }
-            else if (d<22){
+            else if (d<20){
                 Point2D p= new Point2D(positions[i], positions[i+1]);
                 Archer arch =new Archer(200,15,10,60,5,4,p,20);
                 a.put(p,arch);
                 this.EnemyCreats.put(p,arch);
                 espaceJeu[positions[i]][positions[i+1]]=arch;
             }
-            else if (d<30){
+            else if (d<28){
                 Point2D s = new Point2D(positions[i], positions[i+1]);
                 Paysan p = new Paysan("Villager",100,0,0,0,0,0,s);
                 a.put(s,p);
                 espaceJeu[positions[i]][positions[i+1]]=p;
             }
-            else if (d<45){
+            else if (d<38){
                 Point2D p = new Point2D (positions[i], positions[i+1]);
                 Loup l = new Loup(250,20,0,40,0,p,"Wolf");
                 a.put(p,l);
                 this.EnemyCreats.put(p,l);
                 espaceJeu[positions[i]][positions[i+1]]=l;
             }
-            else if (d<60){
+            else if (d<46){
                 Point2D p = new Point2D(positions[i], positions[i+1]);
                 Lapin l = new Lapin(50,0,0,0,0,p,"Rabbit");
                 l.setNom("Bugs");
                 a.put(new Point2D(positions[i],positions[i+1]),l);
                 espaceJeu[positions[i]][positions[i+1]]=l;
             }
-            else if (d<80){
+            else if (d<70){
                 Point2D pos = new Point2D(positions[i], positions[i+1]);
                 int h = rand.nextInt(50)+50;
                 PotionSoin p = new PotionSoin(pos , h);
                 a.put(pos,p);
                 espaceJeu[positions[i]][positions[i+1]]=p;
             }
-            else if (d<90){
+            else if (d<85){
                 Point2D pos = new Point2D(positions[i], positions[i+1]);
                 int h = rand.nextInt(60)+12;
                 Epee p = new Epee(pos , h, 6);
