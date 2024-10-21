@@ -30,8 +30,8 @@ public class Lapin extends Monstre {
      * @param p: position du monstre 
      * 
     */
-    public Lapin(int pV, int dA, int pPar, int paAtt, int paPar, Point2D p){
-        super(pV, dA, pPar, paAtt, paPar, p);
+    public Lapin(int pV, int dA, int pPar, int paAtt, int paPar, Point2D p, String nom){
+        super(pV, dA, pPar, paAtt, paPar, p, nom);
     
     }
     /**

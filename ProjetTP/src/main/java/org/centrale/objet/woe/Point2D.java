@@ -4,6 +4,8 @@
  */
 package org.centrale.objet.woe;
 
+import java.util.Objects;
+
 /**
  * Classe gérant les coordonées de position de l'ensemble des créatures de WoE
  * @author nourkouki
@@ -82,7 +84,22 @@ public class Point2D {
         double rc=Math.sqrt((this.x-p.x)*(this.x-p.x)+(this.y-p.y)*(this.y-p.y));
         return(rc);
     }
-    
+
+    @Override
+    public boolean equals(Object o){
+        if (this == o){
+            return true;
+        }
+        if (!(o instanceof Point2D)){
+            return false;
+        }
+        Point2D p = (Point2D) o;
+        return this.x == p.x && this.y==p.y;
+    }
+    @Override
+    public int hashCode(){
+        return Objects.hash(this.x,this.y);
+    }
 }
 
     

@@ -6,5 +6,5 @@ package org.centrale.objet.woe;
  * @author dghanmi
  */
 public interface Deplacable {
-    public void deplace();
+    public void deplace(World w, int dx , int dy);
 }

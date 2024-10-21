@@ -8,7 +8,9 @@ package org.centrale.objet.woe;
 
 public interface Utilisable {
     public void use(Joueur j);
-    public void AddToInventory(Joueur j);
-    public void SeeEffect();
+    public int BuffDuration();
+    public void SetBuffDuration(int i);
+    public void DebuffAfterEnd(Joueur j);
+    public int getBuffDetails();
 
 }
