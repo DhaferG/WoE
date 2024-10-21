@@ -22,7 +22,7 @@ public class Epee extends Objet implements Utilisable{
    /**
     * Constructeur à partir de deux paramètres et la classe Objet
     * @param pos: position de l'objet
-    * @param pts: Points expérience gagnés grâce à l'objet - Peut être ignoré pour le moment
+    * @param dureeEffet
     * @param degAtt: degats d'attaque
     */
     public Epee(Point2D pos,int degAtt,int dureeEffet) {
@@ -30,29 +30,34 @@ public class Epee extends Objet implements Utilisable{
         this.degAtt = degAtt;
         this.dureeEffet = dureeEffet;
     }
+    @Override
     public void use(Joueur j){
         Personnage p = j.getPersonnage();
         p.setDegAtt(p.getDegAtt()+this.degAtt);
     }
+    @Override
     public int BuffDuration(){
         return this.dureeEffet;
     }
+    @Override
     public void SetBuffDuration(int b){
         this.dureeEffet=b;
     }
+    @Override
     public void DebuffAfterEnd(Joueur j){
         Personnage p = j.getPersonnage();
         p.setDegAtt(p.getDegAtt()-this.degAtt);
     }
+    @Override
     public int getBuffDetails(){
         return this.degAtt;
     }
     
     /**
-     *
-     * @param connection
-     * @param ID_sauvegarde
-     * @param i
+     * methode de sauvegarde dans la BDN
+     * @param connection: connection à la BDN
+     * @param ID_sauvegarde: identifiant de la sauvegarde
+     * @param i: incrément i
      */
     public void saveToDatabase(Connection connection, int ID_sauvegarde, int i) {
     try {
@@ -78,10 +83,10 @@ public class Epee extends Objet implements Utilisable{
 
 
     /**
-     *
-     * @param connection
-     * @param id
-     * @param nom_objet
+     * methode de chargement de la BDN
+     * @param connection: connection à la BDN
+     * @param id: identifiant de la sauvegarde
+     * @param nom_objet: nom objet
      */
     public void getFromDatabase(Connection connection, Integer id, String nom_objet) {
     try {

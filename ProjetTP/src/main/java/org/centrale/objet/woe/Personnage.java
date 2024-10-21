@@ -17,9 +17,6 @@ public abstract class Personnage extends Creature{
     //Attributs de la classe
     
     /**
-     * le nom du personnage
-     */
-    /**
      * distance d'attaque maximale
      */
     public int distAttMax;
@@ -27,7 +24,6 @@ public abstract class Personnage extends Creature{
     // Constructeurs
     /**
      * Un constructeur de la classe Personnage avec 8 parametres
-     * @param n: nom du personnage
      * @param pV: les points de vie du personnage
      * @param dA: degats d'attaque
      * @param pPar: points de parade
@@ -67,53 +63,57 @@ public abstract class Personnage extends Creature{
     // Accesseurs et modificateurs
     
     /**
-     * @return le nom du personnage
+     * retourne le nom du personnage
+     * @return nom
      */
     public String getNom() {
         return nom;
     }
     
-    /** 
-     * @return le nombre de points de Vie
+    /**
+     * retourne les points de vie
+     * @return ptVie
      */
 
     public int getPtVie() {
         return ptVie;
     }
     /**
-     * 
-     * @return le degré d'attaque
+     * retourne le degré d'attaque
+     * @return degAtt
      */
 
     public int getDegAtt() {
         return degAtt;
     }
     /**
-     * 
-     * @return les points de parade
+     * retourne les Points de parade
+     * @return ptPar
      */
 
     public int getPtPar() {
         return ptPar;
     }
+    
     /**
-     * 
-     * @return  le pourcentage d'attaque
+     * retourne le Pourcentage d'attaque
+     * @return pageAtt
      */
+    
     public int getPageAtt() {
         return pageAtt;
     }
     /**
-     * 
-     * @return  le pourcentage de parade
+     * retourne le Pourcentage de Parade
+     * @return pagePar
      */
 
     public int getPagePar() {
         return pagePar;
     }
     /**
-     * 
-     * @return la distance maximale d'attaque
+     * retourne la distance d'attaque maximale.
+     * @return distAttMax
      */
 
     public int getDistAttMax() {
@@ -121,7 +121,7 @@ public abstract class Personnage extends Creature{
     }
     /**
      * 
-     * @return la position du personnage
+     * @return position
      */
 
     public Point2D getPos() {
@@ -139,7 +139,8 @@ public abstract class Personnage extends Creature{
     
     /**
      * modifie les points de vie
-     * @param ptVie
+     * 
+     * @param ptVie: les points de vie
      */
 
     public void setPtVie(int ptVie) {
@@ -147,7 +148,8 @@ public abstract class Personnage extends Creature{
     }
     /**
      * modifie le degré d'attaque
-     * @param degAtt
+     * 
+     * @param degAtt: le degré d'attaque
      */
 
     public void setDegAtt(int degAtt) {
@@ -156,14 +158,16 @@ public abstract class Personnage extends Creature{
     
     /**
      * modifie les points de parade
-     * @param ptPar
+     * 
+     * @param ptPar: les points de parade
      */
     public void setPtPar(int ptPar) {
         this.ptPar = ptPar;
     }
     /**
      * modifie le pourcentage d'attaque
-     * @param pageAtt
+     * 
+     * @param pageAtt: le pourcentage d'attaque
      */
     public void setPageAtt(int pageAtt) {
         this.pageAtt = pageAtt;
@@ -171,7 +175,8 @@ public abstract class Personnage extends Creature{
     
     /**
      * modifie le pourcentage de parade
-     * @param pagePar
+     * 
+     * @param pagePar: le pourcentage de parade
      */
     public void setPagePar(int pagePar) {
         this.pagePar = pagePar;
@@ -179,7 +184,8 @@ public abstract class Personnage extends Creature{
     
     /**
      * modifie la distance d'attaque maximale
-     * @param distAttMax
+     * 
+     * @param distAttMax: la distance d'attaque maximale
      */
 
     public void setDistAttMax(int distAttMax) {
@@ -188,7 +194,8 @@ public abstract class Personnage extends Creature{
     
     /**
      * modifie la position
-     * @param pos
+     * 
+     * @param pos: la position
      */
     public void setPos(Point2D pos) {
         this.pos = pos;

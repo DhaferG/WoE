@@ -40,10 +40,10 @@ public class Nourriture extends Objet implements Utilisable {
     }
     
     /**
-     *
-     * @param connection
-     * @param ID_sauvegarde
-     * @param i
+     * methode de sauvegarde dans la BDN
+     * @param connection: connection à la BDN
+     * @param ID_sauvegarde: identifiant de la sauvegarde
+     * @param i: incrément i
      */
 
 
@@ -71,10 +71,10 @@ public class Nourriture extends Objet implements Utilisable {
 
 
     /**
-     *
-     * @param connection
-     * @param id
-     * @param nom_objet
+     * methode de chargement de la BDN
+     * @param connection: connection à la BDN
+     * @param id: identifiant de la sauvegarde
+     * @param nom_objet: nom objet
      */
     public void getFromDatabase(Connection connection, Integer id, String nom_objet) {
     try {

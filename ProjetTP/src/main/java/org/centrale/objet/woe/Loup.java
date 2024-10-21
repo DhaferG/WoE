@@ -22,7 +22,6 @@ public class Loup extends Monstre implements Combattant {
      * @param paAtt: Pourcentage d'attaque
      * @param paPar: pourcentage de parade
      * @param p: position du monstre 
-     * @param nom: nom du loup
      * 
     */
     public Loup(int pV, int dA, int pPar, int paAtt, int paPar, Point2D p){
@@ -37,6 +36,9 @@ public class Loup extends Monstre implements Combattant {
     public Loup(Loup l) {
         super(l);
     }
+    /**
+     * constructeur par defaut
+     */
 
     public Loup() {
         super();
@@ -69,10 +71,10 @@ public class Loup extends Monstre implements Combattant {
     }
     
     /**
-     *
-     * @param connection
-     * @param ID_sauvegarde
-     * @param i
+    * methode de sauvegarde dans la BDN
+     * @param connection: connection à la BDN
+     * @param ID_sauvegarde: identifiant de la sauvegarde
+     * @param i: incrément i
      */
 
     public void saveToDatabase(Connection connection, int ID_sauvegarde, int i) {
@@ -105,10 +107,10 @@ public class Loup extends Monstre implements Combattant {
 }
 
     /**
-     *
-     * @param connection
-     * @param id
-     * @param nom_monstre
+     * methode de chargement de la BDN
+     * @param connection: connection à la BDN
+     * @param id: identifiant de la sauvegarde
+     * @param nom_monstre: nom du monstre
      */
 
     public void getFromDatabase(Connection connection, Integer id, String nom_monstre) {

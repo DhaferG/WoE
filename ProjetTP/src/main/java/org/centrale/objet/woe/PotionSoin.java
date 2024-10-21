@@ -31,7 +31,7 @@ public class PotionSoin extends Objet{
     
     /** 
      * Méthode permettant d'utiliser la potion
-     * @param c: personnage qui consomme la potion
+     * @param j: joueur
      */
     public void consume(Joueur j){
         if (j.getPersonnage().getPtVie()==j.getMaxHealth()){
@@ -43,51 +43,73 @@ public class PotionSoin extends Objet{
     }
     
     /**
-     *
-     * @param connection
-     * @param ID_sauvegarde
-     * @param id_inventaire
-     * @param i
+     * methode de sauvegarde dans la BDN
+     * @param connection: connection à la BDN
+     * @param ID_sauvegarde: identifiant de la sauvegarde
+     * @param i: incrément i
      */
 
-    public void saveToDatabase(Connection connection,int ID_sauvegarde, int id_inventaire, int i) {
-        try{
-            String Query = "insert into objet(nom_objet,XP,x,y)values('potionSoin" + i + "'," + this.XP+',' + this.pos.x+',' + this.pos.y + ") ";
-            PreparedStatement stm = connection.prepareStatement(Query);
-            stm.executeUpdate();
-            String Query2="insert into contient_potionSoin(nom_potionSoin,id_inventaire)values('postioSoin" + i + "'," +id_inventaire+") " ;
-            PreparedStatement stm2=connection.prepareStatement(Query2);
-            stm2.executeUpdate();
-            System.out.println("PotionSoin nom: potionSoin"+i+" a la position:["+this.pos.x+","+this.pos.y+']');
-        }
-      catch (SQLException ex) {
-            Logger.getLogger(DatabaseTools.class.getName()).log(Level.SEVERE, null, ex);
-            
-        }
+    public void saveToDatabase(Connection connection, int ID_sauvegarde, int i) {
+    try {
+        // Requête pour insérer un objet dans la table "Objet"
+        String query = "INSERT INTO Objet(nom_objet, XP, x, y) VALUES (?, ?, ?, ?)";
+        PreparedStatement stm = connection.prepareStatement(query);
+        
+        // Définir les paramètres pour la requête
+        stm.setString(1, "PotionSoin" + i);          // nom_objet (ex: 'Miel1')
+        stm.setInt(2, this.XP);                // XP (expérience de l'objet)
+        stm.setInt(3, this.pos.getX());        // x (coordonnée X)
+        stm.setInt(4, this.pos.getY());        // y (coordonnée Y)
+
+        // Exécuter la requête
+        stm.executeUpdate();
+
+        // Confirmation dans la console
+        System.out.println("PotionSoin nom: PotionSoin" + i + " à la position: [" + this.pos.getX() + "," + this.pos.getY() + "]");
+        } catch (SQLException ex) {
+        Logger.getLogger(DatabaseTools.class.getName()).log(Level.SEVERE, null, ex);
     }
+}
 
     /**
-     *
-     * @param connection
-     * @param id
-     * @param id_inventaire
-     * @param nom_potionSoin
+     * methode de chargement de la BDN
+     * @param connection: connection à la BDN
+     * @param id: identifiant de la sauvegarde
+     * @param nom_objet: nom objet
      */
-
-    public void getFromDatabase(Connection connection, Integer id,int id_inventaire, String nom_potionSoin) {
-        try{
-        String Query = "select nom_potionSoin,XP,x,y from objet inner join contient_potionSoin using(nom_potionSoin) inner join inventaire using(id_inventaire) inner join contient_inventaire using(id_inventaire) where id_sauvegarde= " + id+"and id_inventaire="+id_inventaire+" and nom_potionSoin='"+nom_potionSoin+"'";
-        PreparedStatement stm = connection.prepareStatement(Query);
-        ResultSet rs = stm.executeQuery();
-        rs.next();
+    public void getFromDatabase(Connection connection, Integer id, String nom_objet) {
+    try {
+        // Requête avec des paramètres pour éviter la concaténation
+        String query = "SELECT o.nom_objet, o.XP, o.x, o.y "
+                     + "FROM objet o "
+                     + "INNER JOIN est_dans_une_sauv s on s.nom_objet=o.nom_objet "
+                     + "INNER JOIN partie p on s.id_partie=p.id_partie "
+                     + "WHERE p.id_sauvegarde = ? AND o.nom_objet = ?";
         
-        this.pos.x=rs.getInt("x");
-        this.pos.y=rs.getInt("y");
-        this.XP=rs.getInt("XP");
-        System.out.println("nom potionSoin est: "+ nom_potionSoin + " x: "+this.pos.x+" y: "+this.pos.y+" pts XP: "+this.XP);
-        } catch (SQLException ex) {
-            Logger.getLogger(DatabaseTools.class.getName()).log(Level.SEVERE, null, ex);
+        PreparedStatement stm = connection.prepareStatement(query);
+        
+        // Définir les paramètres pour la requête
+        stm.setString(1, id.toString());                // Paramètre 1 : id_sauvegarde
+        stm.setString(2, nom_objet);       // Paramètre 3 : nom_objet
+        
+        // Exécuter la requête
+        ResultSet rs = stm.executeQuery();
+
+        // Si un résultat est trouvé, récupérer les valeurs
+        if (rs.next()) {
+            if (this.pos == null) {
+                this.pos = new Point2D();  // Initialiser pos si elle est null
+            }
+            this.pos.setX(rs.getInt("x"));  // Récupérer x
+            this.pos.setY(rs.getInt("y"));  // Récupérer y
+            this.XP = rs.getInt("XP");      // Récupérer les points d'expérience (XP)
             
+            System.out.println("Nom de la potion soin : " + nom_objet + " Position: [" + this.pos.getX() + ", " + this.pos.getY() + "] XP: " + this.XP);
+        } else {
+            System.out.println("Aucune potion soin trouvée avec le nom: " + nom_objet);
         }
+    } catch (SQLException ex) {
+        Logger.getLogger(DatabaseTools.class.getName()).log(Level.SEVERE, null, ex);
     }
+}
 }

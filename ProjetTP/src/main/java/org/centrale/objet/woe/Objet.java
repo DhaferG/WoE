@@ -9,9 +9,6 @@ import java.sql.Connection;
  */
 public abstract class Objet extends ElementDeJeu{
     // Attributs de la classe
-     /** 
-      * position de l'objet
-      */
     /**
      * Points expérience gagnés grâce à l'objet
      */
@@ -28,6 +25,10 @@ public abstract class Objet extends ElementDeJeu{
         this.setNom(nom);
         this.XP=XP;
     }
+    /**
+     * methode affiche
+     * @return 
+     */
     public String affiche(){
         System.out.println(nom);
         return nom;

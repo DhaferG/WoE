@@ -28,7 +28,7 @@ public class Archer extends Personnage implements Combattant{
 
     // Constructeurs
     /**
-     * 
+     * Constructeurs Archer
      * @param pV: les points de vie du personnage
      * @param dA: degats d'attaque
      * @param pPar: points de parade
@@ -43,11 +43,18 @@ public class Archer extends Personnage implements Combattant{
         this.nbFleches = nbFleches;
         this.setNom(this.GenRanArcherName());
     }
+    /**
+     * constructeur de recopie Archer
+     * @param a : un Archer
+     */
 
     public Archer(Archer a) {
         super(a);
         this.nbFleches = a.nbFleches;
     }
+    /**
+     * constructeur par défaut Archer
+     */
 
     public Archer() {
         super();
@@ -95,10 +102,10 @@ public class Archer extends Personnage implements Combattant{
 
     }
     /**
-     *
-     * @param connection
-     * @param ID_sauvegarde
-     * @param i
+     * methode de sauvegarde dans la BDN
+     * @param connection: connection à la BDN
+     * @param ID_sauvegarde: identifiant de la sauvegarde
+     * @param i: incrément i
      */
 
     public void saveToDatabase(Connection connection, int ID_sauvegarde, int i) {
@@ -136,10 +143,10 @@ public class Archer extends Personnage implements Combattant{
     }
 
     /**
-     *
-     * @param connection
-     * @param id
-     * @param nom_humanoide
+     * methode de chargement de la BDN
+     * @param connection: connection à la BDN
+     * @param id: identifiant de la sauvegarde
+     * @param nom_humanoide: nom du personnage
      */
 
     public void getFromDatabase(Connection connection, Integer id, String nom_humanoide) {
@@ -170,7 +177,10 @@ public class Archer extends Personnage implements Combattant{
         }
     }
     
-    
+    /**
+     * genere nom de Archer aléatoire
+     * @return nom Archer
+     */
     public String GenRanArcherName() {
         String[] archerNames = {
             "Legolas",

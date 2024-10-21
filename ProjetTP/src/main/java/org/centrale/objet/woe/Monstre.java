@@ -50,6 +50,7 @@ public abstract class Monstre extends Creature {
     
     // Accesseurs et modificateurs
     /** 
+     * retourne les points de vie
      * @return le nombre de points de Vie
      */
     public int getPtVie(){
@@ -57,7 +58,7 @@ public abstract class Monstre extends Creature {
     }
     
     /**
-     * 
+     * retourne le degré d'attaque
      * @return le degré d'attaque
      */
     public int getDegAtt() {
@@ -65,7 +66,7 @@ public abstract class Monstre extends Creature {
     }
     
     /**
-     * 
+     * retourne les points de parade
      * @return les points de parade
      */
     public int getPtPar() {
@@ -73,7 +74,7 @@ public abstract class Monstre extends Creature {
     }
     
     /**
-     * 
+     * retourne le pourcentage d'attaque
      * @return  le pourcentage d'attaque
      */
     public int getPageAtt() {
@@ -81,7 +82,7 @@ public abstract class Monstre extends Creature {
     }
     
     /**
-     * 
+     * retourne le pourcentage de parade
      * @return  le pourcentage de parade
      */
     public int getPagePar() {
@@ -89,7 +90,7 @@ public abstract class Monstre extends Creature {
     }
     
     /**
-     * 
+     * retourne la position
      * @return la position du personnage
      */
     public Point2D getPos() {
@@ -98,7 +99,7 @@ public abstract class Monstre extends Creature {
     
      /**
      * modifie les points de vie
-     * @param ptVie
+     * @param ptVie: points de vie
      */
     public void setPtVie(int ptVie){
         this.ptVie=ptVie;
@@ -107,7 +108,7 @@ public abstract class Monstre extends Creature {
     
     /**
      * modifie le degré d'attaque
-     * @param degAtt
+     * @param degAtt: degré d'attaque
      */
     public void setDegAtt(int degAtt) {
         this.degAtt = degAtt;
@@ -115,7 +116,7 @@ public abstract class Monstre extends Creature {
     
     /**
      * modifie les points de parade
-     * @param ptPar
+     * @param ptPar: points de parade
      */
     public void setPtPar(int ptPar) {
         this.ptPar = ptPar;
@@ -123,7 +124,7 @@ public abstract class Monstre extends Creature {
     
     /**
      * modifie le pourcentage d'attaque
-     * @param pageAtt
+     * @param pageAtt: pourcentage d'attaque
      */
     public void setPageAtt(int pageAtt) {
         this.pageAtt = pageAtt;
@@ -131,7 +132,7 @@ public abstract class Monstre extends Creature {
     
     /**
      * modifie le pourcentage de parade
-     * @param pagePar
+     * @param pagePar: pourcentage de parade
      */
     public void setPagePar(int pagePar) {
         this.pagePar = pagePar;
@@ -139,7 +140,7 @@ public abstract class Monstre extends Creature {
     
     /**
      * modifie la position
-     * @param pos
+     * @param pos: position
      */
 
     public void setPos(Point2D pos) {

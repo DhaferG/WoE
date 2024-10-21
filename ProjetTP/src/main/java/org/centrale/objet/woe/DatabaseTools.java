@@ -79,8 +79,8 @@ public class DatabaseTools {
     
     /**
      * get Player ID
-     * @param nomJoueur
-     * @param password
+     * @param nomJoueur: nom joueur
+     * @param password: mot de passe
      * @return playerID
      */
     public Integer getPlayerID(String nomJoueur, String password) {
@@ -110,10 +110,10 @@ public class DatabaseTools {
     /**
      * methode save world permet de sauvegarder les informations de WoE dans notre base de données
      *
-     * @param idJoueur
-     * @param nomPartie
-     * @param nomSauvegarde
-     * @param monde
+     * @param idJoueur : identifiant du joueur
+     * @param nomPartie: nom de la partie
+     * @param nomSauvegarde: nom de la sauvegarde
+     * @param monde: monde
      */
         
     public void saveWorld(Integer idJoueur, String nomPartie, String nomSauvegarde, World monde) {
@@ -188,10 +188,10 @@ public class DatabaseTools {
     /**
      * get world from database
      *
-     * @param idJoueur
-     * @param nomPartie
-     * @param nomSauvegarde
-     * @param monde
+     * @param idJoueur : identifiant du joueur
+     * @param nomPartie: nom de la partie
+     * @param nomSauvegarde: nom de la sauvegarde
+     * @param monde: monde
      */
     public void readWorld(Integer idJoueur, String nomPartie, String nomSauvegarde, World monde) {
         try {

@@ -78,6 +78,12 @@ public abstract class Creature extends ElementDeJeu implements Deplacable{
     public Creature(){
         super();
     }
+    /**
+     * méthode deplace
+     * @param w : monde
+     * @param dx: deplacement sur x
+     * @param dy: deplacement sur y
+     */
     public void deplace(World w, int dx , int dy){
         int x = this.pos.getX();
         int y = this.pos.getY();

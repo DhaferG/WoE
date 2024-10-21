@@ -52,10 +52,10 @@ public class Paysan extends Personnage {
     }
     
     /**
-     *
-     * @param connection
-     * @param ID_sauvegarde
-     * @param i
+    * methode de sauvegarde dans la BDN
+     * @param connection: connection à la BDN
+     * @param ID_sauvegarde: identifiant de la sauvegarde
+     * @param i: incrément i
      */
  
     public void saveToDatabase(Connection connection, int ID_sauvegarde, int i) {
@@ -92,10 +92,10 @@ public class Paysan extends Personnage {
     }
 
     /**
-     *
-     * @param connection
-     * @param id
-     * @param nom_humanoide
+     * methode de chargement de la BDN
+     * @param connection: connection à la BDN
+     * @param id: identifiant de la sauvegarde
+     * @param nom_humanoide: nom du personnage
      */
     
     public void getFromDatabase(Connection connection, Integer id, String nom_humanoide) {

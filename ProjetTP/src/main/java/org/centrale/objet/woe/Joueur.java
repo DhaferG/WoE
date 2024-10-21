@@ -23,6 +23,10 @@ public class Joueur {
     public String username;
     
     //constructeurs
+    /**
+     * constructeur Joueur
+     * @param w : monde
+     */
     public Joueur(World w) {
         this.w=w;
         this.p= choisirPersonnage();
@@ -34,9 +38,17 @@ public class Joueur {
     
     }
     //getters:
+    /**
+     * get personnage
+     * @return personnage
+     */
     public Personnage getPersonnage() {
         return this.p;
     }
+    /**
+     * get max health
+     * @return 
+     */
     public int getMaxHealth(){
         return this.Maxhealth;
     }
@@ -81,7 +93,6 @@ public class Joueur {
     }
     /**
      * permet à l'utilsateur de choisir soit se déplacer soit combattre
-     * @param c : créature à combattre
      */
     public void addToInventory(){
         int x = this.p.pos.getX();
@@ -93,6 +104,10 @@ public class Joueur {
             }
         }
     }
+    /**
+     * 
+     * @param i 
+     */
     public void use(int i){
         if (i<0 ||i>5){
             System.out.println("Choix invalide");
@@ -118,15 +133,25 @@ public class Joueur {
         }
 
     }
+    /**
+     * 
+     */
     public void update(){
         for (Utilisable b: this.Buffs){
             b.SetBuffDuration(b.BuffDuration()-1);
         }
         this.Debuff();
     }
+    /**
+     * 
+     * @param u 
+     */
     public void AddBuff(Utilisable u){
         this.Buffs.add(u);
     }
+    /**
+     * 
+     */
     public void Debuff(){
         for(int i=0;i<this.Buffs.size();i++){
             if (this.Buffs.get(i).BuffDuration()<=0){
@@ -135,7 +160,9 @@ public class Joueur {
             }
         }
     }
-
+    /**
+     * 
+     */
     public void combattre(){
         Creature closestCreature = null;
         double minDistance = Double.MAX_VALUE;
@@ -191,7 +218,13 @@ public class Joueur {
     } else {
         System.out.println("Creature not found");
     }
-}
+}   
+    /**
+     * méthode deplace
+     * 
+     * @param dx: deplacement sur x
+     * @param dy: deplacement sur y
+     */
     public void deplacer(int dx, int dy){
         int x = this.p.pos.getX();
         int y = this.p.pos.getY();

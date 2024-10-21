@@ -9,15 +9,23 @@ import java.util.ArrayList;
  * @author dghanmi
  */
 public class Inventaire {
+    // attributs
     private ArrayList<Objet> objets;   
     private static final int MAX_OBJETS = 6; 
 
-    // Constructor
+    /**
+     * constructeur par defaut
+     */
     public Inventaire() {
         objets = new ArrayList<>(MAX_OBJETS); 
     }
 
     // Add an objet to the inventory
+    /**
+     * Add an objet to the inventory
+     * @param objet: objet
+     * @return  boolean
+     */
     public boolean addObjet(Objet objet) {
         if (objets.size() < MAX_OBJETS) {
             objets.add(objet); 
@@ -30,6 +38,10 @@ public class Inventaire {
     }
 
     // Remove an objet from the inventory at a specific slot
+    /**
+     * Remove an objet from the inventory at a specific slot
+     * @param slot : slot
+     */
     public void removeObjet(int slot) {
         if (slot >= 0 && slot < objets.size()) {
             Objet removedObjet = objets.remove(slot);
@@ -40,6 +52,10 @@ public class Inventaire {
     }
 
     // Display all objects in the inventory
+    /**
+     * Display all objects in the inventory
+     * @return 
+     */
     public String displayInventory() {
         if (this.objets.isEmpty()) {
             return "Inventory is empty.";
@@ -56,6 +72,11 @@ public class Inventaire {
             return s;
         }
     }
+    /**
+     * get objet
+     * @param slot: slot
+     * @return 
+     */
 
     public Objet getObjet(int slot) {
         if (slot >= 0 && slot < objets.size()) {
