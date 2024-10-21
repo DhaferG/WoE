@@ -307,36 +307,4 @@ public class GameGUI extends JPanel implements ActionListener, KeyListener {
                     "</html>";
         playerInfoLabel.setText(info);
     }
-
-    public static void main(String[] args) {
-        World world = new World();
-        world.creeMondeAlea(100);
-        Joueur joueurHumain = new Joueur(world);
-
-        // Create the main frame
-        JFrame frame = new JFrame("World of ECN");
-        frame.setLayout(new BorderLayout());
-
-        // Create the player info panel
-        JPanel infoPanel = new JPanel();
-        infoPanel.setLayout(new BorderLayout());
-        infoPanel.setBackground(Color.LIGHT_GRAY);
-
-        // Create player info label
-        JLabel playerInfoLabel = new JLabel();
-        playerInfoLabel.setFont(new Font("Arial", Font.PLAIN, 16));
-        infoPanel.add(playerInfoLabel, BorderLayout.NORTH);
-
-        // Create the game panel
-        GameGUI gamePanel = new GameGUI(world, joueurHumain, playerInfoLabel);
-
-        // Add the game panel (center) and player info panel (south)
-        frame.add(gamePanel, BorderLayout.CENTER);
-        frame.add(infoPanel, BorderLayout.SOUTH);
-
-        // Set up the frame
-        frame.pack();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
-    }
 }
