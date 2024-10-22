@@ -2,4 +2,4 @@
 .vscode/*
 *.lst
 .DS_Store
-target/*
+ProjetTP/target/*
